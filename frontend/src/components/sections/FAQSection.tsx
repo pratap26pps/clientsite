@@ -16,7 +16,7 @@ export function FAQSection() {
       <div className="container-wide">
         <SectionHeading
           eyebrow="FAQ"
-          title="Common Questions About Solar in Canberra"
+          title="Common questions about solar in Canberra"
           description="Everything you need to know about solar installation, batteries, rebates, and our process."
         />
 
@@ -24,7 +24,7 @@ export function FAQSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto mt-16 max-w-3xl"
         >
           <Accordion className="space-y-3">
@@ -32,12 +32,12 @@ export function FAQSection() {
               <AccordionItem
                 key={index}
                 value={`faq-${index}`}
-                className="rounded-2xl border border-border/60 bg-warm-white px-6 data-[state=open]:border-solar-orange/30 data-[state=open]:shadow-lg data-[state=open]:shadow-navy/5"
+                className="rounded-2xl border border-huglo-grey-light bg-warm-white px-6 transition-all duration-300 data-[state=open]:border-huglo-gold/30 data-[state=open]:shadow-lg data-[state=open]:shadow-huglo-black/5"
               >
-                <AccordionTrigger className="py-5 text-left font-heading text-base font-semibold text-charcoal hover:no-underline lg:text-lg">
+                <AccordionTrigger className="py-5 text-left font-heading text-base font-semibold text-huglo-black hover:no-underline lg:text-lg">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="pb-5 leading-relaxed text-charcoal/60">
+                <AccordionContent className="pb-5 leading-relaxed text-huglo-grey">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

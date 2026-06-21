@@ -140,20 +140,20 @@ export function QuoteFormSection() {
     <section id="quote-form" className="section-padding bg-warm-white">
       <div className="container-wide">
         <SectionHeading
-          eyebrow="Get Started"
-          title="Request Your Free Custom Quote"
+          eyebrow="Get in touch with our energy experts"
+          title="Request your free custom quote"
           description="Tell us about your property and energy usage — we'll design a system tailored to your needs."
         />
 
         <div className="mx-auto mt-16 max-w-2xl">
           <div className="mb-8">
-            <div className="mb-3 flex justify-between text-sm font-medium text-charcoal/60">
+            <div className="mb-3 flex justify-between text-sm font-medium text-huglo-grey">
               {STEPS.map((label, i) => (
                 <span
                   key={label}
-                  className={i <= step ? "text-solar-orange" : ""}
+                  className={i <= step ? "font-semibold text-huglo-gold" : ""}
                 >
-                  {label}
+                  {i + 1}. {label}
                 </span>
               ))}
             </div>
@@ -162,7 +162,7 @@ export function QuoteFormSection() {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="rounded-3xl border border-border/60 bg-white p-8 shadow-xl lg:p-10"
+            className="hero-form-card !bg-white"
           >
             <AnimatePresence mode="wait">
               {step === 0 && (
@@ -342,7 +342,7 @@ export function QuoteFormSection() {
                 <Button
                   type="button"
                   onClick={nextStep}
-                  className="h-12 flex-1 bg-solar-orange hover:bg-solar-orange-light"
+                  className="btn-huglo-dark !h-12 flex-1 !py-0"
                 >
                   Continue
                   <ArrowRight className="ml-2 size-4" />
@@ -351,7 +351,7 @@ export function QuoteFormSection() {
                 <Button
                   type="submit"
                   disabled={submitting}
-                  className="h-12 flex-1 bg-solar-orange hover:bg-solar-orange-light"
+                  className="btn-huglo-dark !h-12 flex-1 !py-0"
                 >
                   {submitting ? (
                     <>

@@ -60,20 +60,20 @@ export function ProcessSection() {
           <div className="absolute top-8 right-0 left-0 hidden h-0.5 bg-border lg:block">
             <div
               ref={progressRef}
-              className="h-full w-0 bg-solar-orange"
+              className="h-full w-0 bg-huglo-gold"
             />
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             {PROCESS_STEPS.map((step) => (
               <div key={step.step} className="process-step relative">
-                <div className="mb-6 flex size-16 items-center justify-center rounded-2xl border-2 border-solar-orange bg-white font-heading text-xl font-bold text-solar-orange shadow-lg shadow-solar-orange/10">
+                <div className="mb-6 flex size-16 items-center justify-center rounded-2xl border-2 border-huglo-gold bg-white font-heading text-xl font-bold text-huglo-gold shadow-lg shadow-huglo-gold/10">
                   {step.step}
                 </div>
-                <h3 className="font-heading text-lg font-bold text-charcoal">
+                <h3 className="font-heading text-lg font-bold text-huglo-black">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-charcoal/60">
+                <p className="mt-2 text-sm leading-relaxed text-huglo-grey">
                   {step.description}
                 </p>
               </div>

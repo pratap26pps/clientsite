@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Sun, Battery, Thermometer, ArrowUpRight } from "lucide-react";
 import { SERVICES } from "@/lib/constants";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { StaggerContainer, StaggerItem } from "@/components/shared/ScrollReveal";
 
 const iconMap = {
   sun: Sun,
@@ -17,50 +18,43 @@ export function ServicesSection() {
     <section id="services" className="section-padding bg-warm-white">
       <div className="container-wide">
         <SectionHeading
-          eyebrow="Our Services"
-          title="Complete Energy Solutions for Your Home"
+          eyebrow="Our services"
+          title="Complete energy solutions for your home"
           description="From solar generation to storage and hot water — we deliver end-to-end energy systems engineered for Canberra conditions."
         />
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
-          {SERVICES.map((service, index) => {
+        <StaggerContainer className="mt-16 grid gap-8 lg:grid-cols-3">
+          {SERVICES.map((service) => {
             const Icon = iconMap[service.icon as keyof typeof iconMap];
             return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-              >
+              <StaggerItem key={service.id}>
                 <Link href={service.href} className="group block h-full">
-                  <div className="relative h-full overflow-hidden rounded-3xl border border-border/60 bg-white p-10 transition-all duration-500 hover:border-solar-orange/30 hover:shadow-2xl hover:shadow-navy/5">
-                    <motion.div
-                      className="mb-8 flex size-16 items-center justify-center rounded-2xl bg-navy text-solar-gold"
-                      whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
-                    >
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3 }}
+                    className="card-huglo relative h-full overflow-hidden p-10"
+                  >
+                    <div className="mb-8 flex size-16 items-center justify-center rounded-2xl bg-huglo-black-bg text-huglo-gold transition-colors duration-300 group-hover:bg-huglo-gold group-hover:text-huglo-black">
                       <Icon className="size-7" />
-                    </motion.div>
+                    </div>
 
-                    <h3 className="font-heading text-2xl font-bold text-charcoal">
+                    <h3 className="font-heading text-2xl font-bold text-huglo-black">
                       {service.title}
                     </h3>
-                    <p className="mt-4 leading-relaxed text-charcoal/60">
+                    <p className="mt-4 leading-relaxed text-huglo-grey">
                       {service.description}
                     </p>
 
-                    <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-solar-orange">
+                    <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-huglo-gold">
                       Learn more
-                      <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </div>
-
-                    <div className="absolute -right-8 -bottom-8 size-32 rounded-full bg-solar-orange/5 transition-transform duration-500 group-hover:scale-150" />
-                  </div>
+                  </motion.div>
                 </Link>
-              </motion.div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

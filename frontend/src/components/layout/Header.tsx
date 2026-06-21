@@ -3,17 +3,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, MapPin, Menu, X, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Phone, X } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#technology", label: "Technology" },
+  { href: "#technology", label: "Products" },
   { href: "#services", label: "Services" },
   { href: "#process", label: "Process" },
   { href: "#testimonials", label: "Reviews" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#faq", label: "Resources" },
 ];
 
 export function Header() {
@@ -26,6 +25,13 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   const scrollToQuote = () => {
     setMobileOpen(false);
     document.getElementById("quote-form")?.scrollIntoView({ behavior: "smooth" });
@@ -33,34 +39,27 @@ export function Header() {
 
   return (
     <>
-      <header
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
           "fixed top-0 right-0 left-0 z-50 transition-all duration-500",
           scrolled
-            ? "glass-dark py-3 shadow-lg shadow-navy/10"
+            ? "glass-dark py-3 shadow-lg shadow-black/20"
             : "bg-transparent py-5"
         )}
       >
         <div className="container-wide flex items-center justify-between px-6 lg:px-8">
           <Link href="/" className="group flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-solar-orange shadow-lg shadow-solar-orange/30 transition-transform group-hover:scale-105">
-              <Sun className="size-5 text-white" />
+            <div className="flex size-10 items-center justify-center rounded-xl bg-huglo-gold transition-transform duration-300 group-hover:scale-105">
+              <span className="font-heading text-lg font-bold text-huglo-black">C</span>
             </div>
             <div className="hidden sm:block">
-              <div
-                className={cn(
-                  "font-heading text-sm font-bold tracking-tight transition-colors",
-                  scrolled ? "text-white" : "text-white"
-                )}
-              >
+              <div className="font-heading text-sm font-bold tracking-tight text-white">
                 Capital Solar
               </div>
-              <div
-                className={cn(
-                  "text-[10px] font-medium uppercase tracking-widest transition-colors",
-                  scrolled ? "text-white/60" : "text-white/70"
-                )}
-              >
+              <div className="text-[10px] font-medium uppercase tracking-widest text-white/60">
                 Energy
               </div>
             </div>
@@ -68,14 +67,7 @@ export function Header() {
 
           <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-solar-orange",
-                  scrolled ? "text-white/80" : "text-white/90"
-                )}
-              >
+              <a key={link.href} href={link.href} className="nav-link-huglo">
                 {link.label}
               </a>
             ))}
@@ -84,68 +76,92 @@ export function Header() {
           <div className="hidden items-center gap-6 lg:flex">
             <a
               href={SITE.phoneHref}
-              className={cn(
-                "flex items-center gap-2 text-sm font-semibold transition-colors hover:text-solar-orange",
-                scrolled ? "text-white" : "text-white"
-              )}
+              className="flex items-center gap-2 text-sm font-semibold text-white transition-colors duration-300 hover:text-huglo-gold"
             >
-              <Phone className="size-4 text-solar-orange" />
+              <Phone className="size-4 text-huglo-gold" />
               {SITE.phone}
             </a>
-            <Button
-              onClick={scrollToQuote}
-              className="h-11 rounded-full bg-solar-orange px-6 font-semibold text-white shadow-lg shadow-solar-orange/30 hover:bg-solar-orange-light"
-            >
-              Request Free Quote
-            </Button>
+            <button onClick={scrollToQuote} className="btn-huglo-gold !px-6 !py-3 !text-sm">
+              Get a quote
+            </button>
           </div>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex size-10 items-center justify-center rounded-lg text-white lg:hidden"
+            className="relative flex size-10 items-center justify-center lg:hidden"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+            <AnimatePresence mode="wait">
+              {mobileOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="size-6 text-white" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col gap-1.5"
+                >
+                  <span className="block h-0.5 w-6 bg-white" />
+                  <span className="block h-0.5 w-6 bg-white" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-navy pt-24 lg:hidden"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 bg-huglo-black-bg pt-24 lg:hidden"
           >
-            <nav className="flex flex-col gap-1 px-6">
-              {navLinks.map((link) => (
-                <a
+            <nav className="flex flex-col px-6">
+              {navLinks.map((link, i) => (
+                <motion.a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="border-b border-white/10 py-4 text-lg font-medium text-white"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
+                  className="border-b border-white/10 py-5 text-lg font-semibold text-white transition-colors hover:text-huglo-gold"
                 >
                   {link.label}
-                </a>
+                </motion.a>
               ))}
-              <a
+              <motion.a
                 href={SITE.phoneHref}
-                className="flex items-center gap-2 py-4 text-lg font-semibold text-solar-orange"
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05, duration: 0.3 }}
+                className="flex items-center gap-2 py-5 text-lg font-semibold text-huglo-gold"
               >
                 <Phone className="size-5" />
                 {SITE.phone}
-              </a>
-              <div className="flex items-center gap-2 py-4 text-sm text-white/60">
-                <MapPin className="size-4" />
-                {SITE.addressShort}
-              </div>
-              <Button
+              </motion.a>
+              <motion.button
                 onClick={scrollToQuote}
-                className="mt-4 h-12 w-full rounded-full bg-solar-orange text-base font-semibold"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
+                className="btn-huglo-gold mt-6 w-full"
               >
-                Request Free Quote
-              </Button>
+                Get a quote
+              </motion.button>
             </nav>
           </motion.div>
         )}
