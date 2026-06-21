@@ -13,7 +13,6 @@ import {
   Loader2,
   FileText,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
@@ -114,19 +113,13 @@ export function QuoteFormSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mx-auto max-w-lg rounded-3xl border border-border/60 bg-white p-12 text-center shadow-xl"
+            className="form-card mx-auto max-w-lg p-10 text-center"
           >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            >
-              <CheckCircle2 className="mx-auto size-16 text-green-500" />
-            </motion.div>
-            <h3 className="mt-6 font-heading text-2xl font-bold text-charcoal">
-              Quote Request Received!
+            <CheckCircle2 className="mx-auto size-14 text-huglo-green" />
+            <h3 className="mt-5 font-heading text-xl font-bold text-huglo-black sm:text-2xl">
+              Quote request received
             </h3>
-            <p className="mt-3 text-charcoal/60">
+            <p className="mt-3 text-sm text-huglo-grey sm:text-base">
               Thank you for your enquiry. Our Canberra team will contact you
               within 24 hours with a customised solar proposal.
             </p>
@@ -145,25 +138,35 @@ export function QuoteFormSection() {
           description="Tell us about your property and energy usage — we'll design a system tailored to your needs."
         />
 
-        <div className="mx-auto mt-16 max-w-2xl">
+        <div className="mx-auto mt-12 max-w-xl sm:mt-14">
+          {/* Step indicator */}
           <div className="mb-8">
-            <div className="mb-3 flex justify-between text-sm font-medium text-huglo-grey">
+            <div className="flex items-center justify-between">
               {STEPS.map((label, i) => (
-                <span
-                  key={label}
-                  className={i <= step ? "font-semibold text-huglo-gold" : ""}
-                >
-                  {i + 1}. {label}
-                </span>
+                <div key={label} className="flex flex-1 flex-col items-center">
+                  <div
+                    className={`flex size-8 items-center justify-center rounded-full text-sm font-bold transition-colors duration-300 ${
+                      i <= step
+                        ? "bg-huglo-gold text-huglo-black"
+                        : "bg-huglo-grey-light/50 text-huglo-grey"
+                    }`}
+                  >
+                    {i + 1}
+                  </div>
+                  <span
+                    className={`mt-2 hidden text-center text-xs sm:block ${
+                      i <= step ? "font-semibold text-huglo-black" : "text-huglo-grey"
+                    }`}
+                  >
+                    {label}
+                  </span>
+                </div>
               ))}
             </div>
-            <Progress value={progress} className="h-2" />
+            <Progress value={progress} className="mt-4 h-1.5" />
           </div>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="hero-form-card !bg-white"
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="form-card">
             <AnimatePresence mode="wait">
               {step === 0 && (
                 <motion.div
@@ -233,13 +236,13 @@ export function QuoteFormSection() {
                       {BILL_RANGES.map((range) => (
                         <label
                           key={range.value}
-                          className="flex cursor-pointer items-center gap-3 rounded-xl border border-border p-4 transition-colors has-[:checked]:border-solar-orange has-[:checked]:bg-solar-orange/5"
+                          className="flex cursor-pointer items-center gap-3 rounded-xl border border-huglo-grey-light p-4 transition-colors has-[:checked]:border-huglo-gold has-[:checked]:bg-huglo-gold/5"
                         >
                           <input
                             type="radio"
                             value={range.value}
                             {...register("electricityBill")}
-                            className="accent-solar-orange"
+                            className="accent-huglo-gold"
                           />
                           <span className="text-sm font-medium">
                             {range.label}
@@ -266,15 +269,15 @@ export function QuoteFormSection() {
                 >
                   <div>
                     <Label>Upload Your Electricity Bill (Optional)</Label>
-                    <p className="mt-1 text-sm text-charcoal/50">
+                    <p className="mt-1 text-sm text-huglo-grey">
                       Helps us provide a more accurate quote. JPG, PNG, or PDF up
                       to 10MB.
                     </p>
 
                     {!billFile ? (
-                      <label className="mt-4 flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border py-12 transition-colors hover:border-solar-orange/50 hover:bg-solar-orange/5">
-                        <Upload className="size-8 text-charcoal/30" />
-                        <span className="mt-3 text-sm font-medium text-charcoal/60">
+                      <label className="mt-4 flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-huglo-grey-light py-10 transition-colors hover:border-huglo-gold/40 hover:bg-huglo-gold/5">
+                        <Upload className="size-7 text-huglo-grey/50" />
+                        <span className="mt-2 text-sm font-medium text-huglo-grey">
                           Click to upload or drag and drop
                         </span>
                         <input
@@ -325,46 +328,45 @@ export function QuoteFormSection() {
               )}
             </AnimatePresence>
 
-            <div className="mt-8 flex gap-4">
+            <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row">
               {step > 0 && (
-                <Button
+                <button
                   type="button"
-                  variant="outline"
                   onClick={() => setStep((s) => s - 1)}
-                  className="h-12 flex-1"
+                  className="btn-huglo-outline btn-md flex-1"
                 >
-                  <ArrowLeft className="mr-2 size-4" />
+                  <ArrowLeft className="size-4" />
                   Back
-                </Button>
+                </button>
               )}
 
               {step < STEPS.length - 1 ? (
-                <Button
+                <button
                   type="button"
                   onClick={nextStep}
-                  className="btn-huglo-dark !h-12 flex-1 !py-0"
+                  className="btn-huglo-dark btn-md flex-1"
                 >
                   Continue
-                  <ArrowRight className="ml-2 size-4" />
-                </Button>
+                  <ArrowRight className="size-4" />
+                </button>
               ) : (
-                <Button
+                <button
                   type="submit"
                   disabled={submitting}
-                  className="btn-huglo-dark !h-12 flex-1 !py-0"
+                  className="btn-huglo-dark btn-md flex-1"
                 >
                   {submitting ? (
                     <>
-                      <Loader2 className="mr-2 size-4 animate-spin" />
+                      <Loader2 className="size-4 animate-spin" />
                       Submitting...
                     </>
                   ) : (
                     <>
-                      Submit Quote Request
-                      <ArrowRight className="ml-2 size-4" />
+                      Submit request
+                      <ArrowRight className="size-4" />
                     </>
                   )}
-                </Button>
+                </button>
               )}
             </div>
           </form>

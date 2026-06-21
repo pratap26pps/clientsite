@@ -9,12 +9,10 @@ import {
   MapPin,
   Star,
   ChevronDown,
-  DollarSign,
   Zap,
 } from "lucide-react";
 import { TRUST_BADGES, STATS } from "@/lib/constants";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
-import { cn } from "@/lib/utils";
 
 const badgeIcons = {
   "shield-check": ShieldCheck,
@@ -22,10 +20,10 @@ const badgeIcons = {
   zap: Zap,
 } as const;
 
-const floatingBadges = [
-  { icon: ShieldCheck, label: "Australian owned" },
-  { icon: DollarSign, label: "Electricity savings" },
-  { icon: MapPin, label: "Local energy experts" },
+const quickSteps = [
+  "Enter your details and energy usage",
+  "Receive a custom design and quote",
+  "Professional installation and support",
 ];
 
 export function Hero() {
@@ -35,9 +33,8 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   const scrollToQuote = () => {
     document.getElementById("quote-form")?.scrollIntoView({ behavior: "smooth" });
@@ -50,7 +47,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-screen items-center overflow-hidden"
+      className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
       <motion.div style={{ y: imageY }} className="absolute inset-0">
         <Image
@@ -61,73 +58,73 @@ export function Hero() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/50 to-black/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/55 to-black/85" />
       </motion.div>
 
       <motion.div
-        style={{ y: contentY, opacity }}
-        className="container-wide relative z-10 px-6 pt-32 pb-24 lg:px-8"
+        style={{ opacity }}
+        className="container-wide relative z-10 px-5 pt-28 pb-28 sm:px-6 sm:pt-32 lg:px-8"
       >
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left: Hero text */}
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 flex flex-wrap gap-3"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-5 flex flex-wrap gap-2"
             >
-              {TRUST_BADGES.map((badge, i) => {
+              {TRUST_BADGES.map((badge) => {
                 const Icon =
                   badgeIcons[badge.icon as keyof typeof badgeIcons] ?? ShieldCheck;
                 return (
-                  <motion.span
+                  <span
                     key={badge.label}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 + i * 0.1, duration: 0.4 }}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium text-white backdrop-blur-sm"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur-sm"
                   >
-                    <Icon className="size-3.5 text-huglo-gold" />
+                    <Icon className="size-3 text-huglo-gold" />
                     {badge.label}
-                  </motion.span>
+                  </span>
                 );
               })}
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="font-heading text-4xl leading-[1.1] font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="font-heading text-[2rem] leading-[1.12] font-bold tracking-tight text-white sm:text-5xl lg:text-[3.25rem]"
             >
               Your energy mate for{" "}
               <span className="text-gradient-gold">Canberra solar</span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-6 max-w-xl text-lg leading-relaxed text-white/75"
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="mt-5 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg"
             >
-              Capital Solar Energy is your one-stop energy shop — premium solar,
-              battery storage, and heat pumps custom-designed for Canberra and
-              Southern NSW homes.
+              Premium solar, battery storage, and heat pumps — custom-designed
+              for Canberra and Southern NSW homes.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-10 flex flex-wrap gap-4"
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <button onClick={scrollToQuote} className="btn-huglo-gold group">
+              <button
+                onClick={scrollToQuote}
+                className="btn-huglo-gold btn-lg group w-full sm:w-auto"
+              >
                 Get a quote
-                <ArrowRight className="ml-2 size-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </button>
-              <button onClick={scrollToPackages} className="btn-huglo-ghost">
+              <button
+                onClick={scrollToPackages}
+                className="btn-huglo-ghost btn-md w-full sm:w-auto"
+              >
                 Learn more
               </button>
             </motion.div>
@@ -135,85 +132,70 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.1 }}
-              className="mt-8 flex items-center gap-2"
+              transition={{ delay: 0.5 }}
+              className="mt-6 flex items-center gap-2"
             >
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className="size-4 fill-huglo-gold text-huglo-gold"
+                    className="size-3.5 fill-huglo-gold text-huglo-gold sm:size-4"
                   />
                 ))}
               </div>
-              <span className="text-sm text-white/70">
+              <span className="text-xs text-white/60 sm:text-sm">
                 Rated 4.9/5 by Canberra homeowners
               </span>
             </motion.div>
           </div>
 
-          {/* Right: Hero form card (Huglo-style) */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="hero-form-card"
           >
-            <h3 className="font-heading text-xl font-bold text-huglo-black">
+            <p className="text-xs font-bold uppercase tracking-widest text-huglo-gold">
+              Free quote
+            </p>
+            <h3 className="mt-2 font-heading text-xl font-bold text-huglo-black sm:text-2xl">
               Save on your household electricity bill
             </h3>
-            <p className="mt-2 text-sm text-huglo-grey">
-              Get a free, no-obligation quote tailored to your home and energy usage.
+            <p className="mt-2 text-sm leading-relaxed text-huglo-grey">
+              Tell us about your home and we&apos;ll design a system with a full
+              breakdown of costs and savings.
             </p>
 
-            <div className="mt-6 space-y-4">
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-huglo-grey">
-                  Your suburb
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Mitchell, ACT"
-                  className="w-full rounded-xl border border-huglo-grey-light bg-huglo-black/[0.03] px-4 py-3 text-sm text-huglo-black placeholder:text-huglo-grey/60 focus:border-huglo-gold focus:outline-none focus:ring-2 focus:ring-huglo-gold/20"
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-huglo-grey">
-                  Quarterly electricity bill
-                </label>
-                <div className="relative">
-                  <span className="absolute top-1/2 left-4 -translate-y-1/2 text-sm text-huglo-grey">
-                    $
+            <ul className="mt-6 space-y-3">
+              {quickSteps.map((step, i) => (
+                <li key={step} className="flex items-start gap-3 text-sm text-huglo-black">
+                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-huglo-gold/15 text-xs font-bold text-huglo-gold">
+                    {i + 1}
                   </span>
-                  <input
-                    type="text"
-                    placeholder="500"
-                    className="w-full rounded-xl border border-huglo-grey-light bg-huglo-black/[0.03] py-3 pr-4 pl-8 text-sm text-huglo-black placeholder:text-huglo-grey/60 focus:border-huglo-gold focus:outline-none focus:ring-2 focus:ring-huglo-gold/20"
-                  />
-                </div>
-              </div>
-            </div>
+                  {step}
+                </li>
+              ))}
+            </ul>
 
             <button
               onClick={scrollToQuote}
-              className="btn-huglo-dark mt-6 w-full !py-4"
+              className="btn-huglo-dark btn-md mt-8 w-full"
             >
-              Continue
-              <ArrowRight className="ml-2 size-5" />
+              Get started
+              <ArrowRight className="size-4" />
             </button>
 
             <p className="mt-4 text-center text-xs text-huglo-grey">
-              Free quote · No obligation · Response within 24 hours
+              No obligation · Response within 24 hours
             </p>
           </motion.div>
         </div>
 
-        {/* Stats row */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.9 }}
-          className="mt-16 grid grid-cols-2 gap-8 border-t border-white/10 pt-10 sm:grid-cols-4"
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="mt-14 grid grid-cols-2 gap-6 border-t border-white/10 pt-10 sm:grid-cols-4 sm:gap-8"
         >
           {STATS.map((stat) => (
             <AnimatedCounter
@@ -226,39 +208,12 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Floating trust badges (Huglo hero icons) */}
-      <div className="pointer-events-none absolute inset-0 z-[5] hidden lg:block">
-        {floatingBadges.map((badge, i) => (
-          <motion.div
-            key={badge.label}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.2 + i * 0.2, duration: 0.5 }}
-            className={cn(
-              "animate-float absolute flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm",
-              i === 0 && "top-[30%] right-[8%]",
-              i === 1 && "top-[45%] right-[5%] animate-float-delay-1",
-              i === 2 && "top-[60%] right-[10%] animate-float-delay-2"
-            )}
-          >
-            <badge.icon className="size-3.5 text-huglo-gold" />
-            {badge.label}
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Scroll down indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
-      >
-        <span className="text-xs font-semibold uppercase tracking-widest text-white/50">
-          Scroll down
+      <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-1.5 lg:flex">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
+          Scroll
         </span>
-        <ChevronDown className="scroll-indicator size-5 text-white/50" />
-      </motion.div>
+        <ChevronDown className="scroll-indicator size-4 text-white/40" />
+      </div>
     </section>
   );
 }

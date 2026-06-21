@@ -12,7 +12,7 @@ const navLinks = [
   { href: "#services", label: "Services" },
   { href: "#process", label: "Process" },
   { href: "#testimonials", label: "Reviews" },
-  { href: "#faq", label: "Resources" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export function Header() {
@@ -20,7 +20,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -39,33 +39,30 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      <header
         className={cn(
-          "fixed top-0 right-0 left-0 z-50 transition-all duration-500",
-          scrolled
-            ? "glass-dark py-3 shadow-lg shadow-black/20"
-            : "bg-transparent py-5"
+          "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
+          scrolled ? "glass-dark py-3" : "bg-transparent py-4 sm:py-5"
         )}
       >
-        <div className="container-wide flex items-center justify-between px-6 lg:px-8">
-          <Link href="/" className="group flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-huglo-gold transition-transform duration-300 group-hover:scale-105">
-              <span className="font-heading text-lg font-bold text-huglo-black">C</span>
+        <div className="container-wide flex items-center justify-between px-5 sm:px-6 lg:px-8">
+          <Link href="/" className="group flex items-center gap-2.5">
+            <div className="flex size-9 items-center justify-center rounded-lg bg-huglo-gold transition-transform duration-200 group-hover:scale-[1.03] sm:size-10 sm:rounded-xl">
+              <span className="font-heading text-base font-bold text-huglo-black sm:text-lg">
+                C
+              </span>
             </div>
             <div className="hidden sm:block">
               <div className="font-heading text-sm font-bold tracking-tight text-white">
                 Capital Solar
               </div>
-              <div className="text-[10px] font-medium uppercase tracking-widest text-white/60">
+              <div className="text-[10px] font-medium uppercase tracking-widest text-white/50">
                 Energy
               </div>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-7 lg:flex">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="nav-link-huglo">
                 {link.label}
@@ -73,97 +70,79 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
             <a
               href={SITE.phoneHref}
-              className="flex items-center gap-2 text-sm font-semibold text-white transition-colors duration-300 hover:text-huglo-gold"
+              className="flex items-center gap-2 text-sm font-semibold text-white/90 transition-colors duration-200 hover:text-huglo-gold"
             >
-              <Phone className="size-4 text-huglo-gold" />
+              <Phone className="size-3.5 text-huglo-gold" />
               {SITE.phone}
             </a>
-            <button onClick={scrollToQuote} className="btn-huglo-gold !px-6 !py-3 !text-sm">
+            <button onClick={scrollToQuote} className="btn-huglo-gold btn-sm">
               Get a quote
             </button>
           </div>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative flex size-10 items-center justify-center lg:hidden"
-            aria-label="Toggle menu"
+            className="flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 lg:hidden"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
-            <AnimatePresence mode="wait">
-              {mobileOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="size-6 text-white" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex flex-col gap-1.5"
-                >
-                  <span className="block h-0.5 w-6 bg-white" />
-                  <span className="block h-0.5 w-6 bg-white" />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {mobileOpen ? <X className="size-5" /> : (
+              <div className="flex flex-col gap-1.5">
+                <span className="block h-0.5 w-5 bg-white" />
+                <span className="block h-0.5 w-5 bg-white" />
+              </div>
+            )}
           </button>
         </div>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-huglo-black-bg pt-24 lg:hidden"
-          >
-            <nav className="flex flex-col px-6">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.3 }}
-                  className="border-b border-white/10 py-5 text-lg font-semibold text-white transition-colors hover:text-huglo-gold"
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+            <motion.nav
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-huglo-black-bg pt-20 shadow-2xl lg:hidden"
+            >
+              <div className="flex flex-col px-5">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="border-b border-white/10 py-4 text-base font-semibold text-white transition-colors hover:text-huglo-gold"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <a
+                  href={SITE.phoneHref}
+                  className="flex items-center gap-2 py-4 text-base font-semibold text-huglo-gold"
                 >
-                  {link.label}
-                </motion.a>
-              ))}
-              <motion.a
-                href={SITE.phoneHref}
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.05, duration: 0.3 }}
-                className="flex items-center gap-2 py-5 text-lg font-semibold text-huglo-gold"
-              >
-                <Phone className="size-5" />
-                {SITE.phone}
-              </motion.a>
-              <motion.button
-                onClick={scrollToQuote}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
-                className="btn-huglo-gold mt-6 w-full"
-              >
-                Get a quote
-              </motion.button>
-            </nav>
-          </motion.div>
+                  <Phone className="size-4" />
+                  {SITE.phone}
+                </a>
+                <button
+                  onClick={scrollToQuote}
+                  className="btn-huglo-gold btn-md mt-4 w-full"
+                >
+                  Get a quote
+                </button>
+              </div>
+            </motion.nav>
+          </>
         )}
       </AnimatePresence>
     </>

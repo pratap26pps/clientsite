@@ -43,6 +43,36 @@ export const TRUST_CARDS = [
   },
 ] as const;
 
+export const SAVINGS_SECTION = {
+  beforeAmount: "$680",
+  afterAmount: "$65",
+  title: "Electricity Bills Won't Stop",
+  titleHighlight: "Going Up.",
+  description:
+    "Canberra households are facing record electricity costs. A properly sized solar and battery system is the most effective way to take control of your energy spend.",
+  features: [
+    {
+      text: "The ACT has some of the highest electricity rates in Australia — and they're climbing year after year.",
+      icon: "trending",
+    },
+    {
+      text: "Most Canberra families are paying $500–$1,200 per quarter on electricity alone.",
+      icon: "dollar",
+    },
+    {
+      text: "Solar + battery can cut your bills by 70–90% from day one — with payback in as little as 3–5 years.",
+      icon: "battery",
+    },
+    {
+      text: "Switching now locks in savings before the next price rise hits your household budget.",
+      icon: "lock",
+    },
+  ],
+  cta: "Calculate My Savings",
+  footerNote:
+    "Average Annual Savings: $1,800 – $4,500 per year for a typical Canberra household with a 6.6kW system + battery.",
+} as const;
+
 export const SOLAR_PANELS = [
   {
     id: "jinko",

@@ -11,7 +11,6 @@
   --font-heading: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
 
-  /* Huglo-inspired palette */
   --color-huglo-gold: #ffac00;
   --color-huglo-gold-light: #ffc940;
   --color-huglo-gold-dark: #e69a00;
@@ -22,7 +21,6 @@
   --color-huglo-green: #2ba985;
   --color-huglo-salmon: #ff996d;
 
-  /* Legacy aliases (used throughout components) */
   --color-solar-orange: #ffac00;
   --color-solar-orange-light: #ffc940;
   --color-solar-orange-dark: #e69a00;
@@ -123,124 +121,106 @@
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
-  }
   .glass-dark {
-    @apply bg-huglo-black-bg/95 backdrop-blur-xl border border-white/5;
+    @apply border-b border-white/10 bg-huglo-black-bg/90 backdrop-blur-md;
   }
+
   .text-gradient-gold {
     @apply bg-gradient-to-r from-huglo-gold to-huglo-gold-light bg-clip-text text-transparent;
   }
-  .text-gradient-orange {
-    @apply bg-gradient-to-r from-huglo-gold to-huglo-gold-light bg-clip-text text-transparent;
-  }
+
   .section-padding {
-    @apply px-6 py-20 lg:px-8 lg:py-28;
-  }
-  .container-wide {
-    @apply mx-auto max-w-7xl;
+    @apply px-5 py-16 sm:px-6 lg:px-8 lg:py-24;
   }
 
-  /* Huglo-style gold CTA button */
+  .container-wide {
+    @apply mx-auto max-w-6xl;
+  }
+
+  /* ── Buttons ── */
   .btn-huglo-gold {
-    @apply inline-flex items-center justify-center rounded-full bg-huglo-gold px-10 py-5 text-base font-semibold text-huglo-black transition-all duration-300;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-huglo-gold font-semibold text-huglo-black transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-huglo-gold focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
   .btn-huglo-gold:hover {
-    @apply bg-white text-huglo-black;
+    @apply bg-white;
   }
 
-  /* Huglo-style dark CTA button (gold → black on hover) */
   .btn-huglo-dark {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-huglo-gold bg-huglo-gold px-10 py-5 text-base font-semibold text-huglo-black transition-all duration-300;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-huglo-gold bg-huglo-gold font-semibold text-huglo-black transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-huglo-gold focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
   .btn-huglo-dark:hover {
     @apply border-huglo-gold bg-huglo-black text-white;
   }
 
-  /* Huglo ghost/outline button */
   .btn-huglo-ghost {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-transparent px-10 py-5 text-base font-semibold text-white transition-all duration-300;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-white/25 bg-transparent font-semibold text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-huglo-gold focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
   .btn-huglo-ghost:hover {
-    @apply border-huglo-gold bg-white/10;
+    @apply border-white/50 bg-white/10;
   }
 
-  /* Circular carousel nav buttons (Huglo slick style) */
-  .btn-huglo-carousel {
-    @apply flex size-[70px] items-center justify-center rounded-full border-2 border-huglo-grey-light bg-transparent text-huglo-grey transition-all duration-200;
+  .btn-huglo-outline {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-huglo-grey-light bg-white font-semibold text-huglo-black transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-huglo-gold focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
-  .btn-huglo-carousel:hover {
-    @apply border-huglo-gold bg-white/30;
+  .btn-huglo-outline:hover {
+    @apply border-huglo-gold bg-huglo-black/[0.02];
   }
 
-  /* Nav link with animated bullet (Huglo style) */
+  .btn-sm {
+    @apply px-5 py-2.5 text-sm;
+  }
+
+  .btn-md {
+    @apply px-7 py-3 text-sm;
+  }
+
+  .btn-lg {
+    @apply px-8 py-3.5 text-base sm:px-10 sm:py-4;
+  }
+
+  /* ── Nav ── */
   .nav-link-huglo {
-    @apply relative inline-flex items-center gap-2 text-sm font-semibold text-white/90 transition-colors duration-300 hover:text-huglo-gold;
-  }
-  .nav-link-huglo::before {
-    content: "";
-    @apply size-1.5 scale-0 rounded-full bg-huglo-gold transition-transform duration-300;
-  }
-  .nav-link-huglo:hover::before {
-    @apply scale-100;
+    @apply relative text-sm font-semibold text-white/80 transition-colors duration-200 hover:text-white;
   }
 
-  /* Scroll-down indicator animation */
+  .nav-link-huglo::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-0.5 w-0 bg-huglo-gold transition-all duration-300;
+  }
+
+  .nav-link-huglo:hover::after {
+    @apply w-full;
+  }
+
+  /* ── Cards ── */
+  .card-huglo {
+    @apply rounded-2xl border border-huglo-grey-light/80 bg-white shadow-sm transition-all duration-300;
+  }
+
+  .card-huglo:hover {
+    @apply border-huglo-grey-light shadow-md;
+  }
+
+  .hero-form-card {
+    @apply rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.35)] ring-1 ring-black/5 sm:rounded-3xl sm:p-8;
+  }
+
+  .form-card {
+    @apply rounded-2xl border border-huglo-grey-light/80 bg-white p-6 shadow-sm sm:p-8 lg:p-10;
+  }
+
+  /* ── Carousel controls ── */
+  .btn-huglo-carousel {
+    @apply flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-white/20 bg-white/5 text-white/70 transition-all duration-200 hover:border-huglo-gold hover:bg-white/10 hover:text-white sm:size-14;
+  }
+
+  /* ── Scroll indicator ── */
   .scroll-indicator {
-    animation: scroll-bounce 2s ease-in-out infinite;
+    animation: scroll-bounce 2.5s ease-in-out infinite;
   }
 
   @keyframes scroll-bounce {
-    0%, 100% { transform: translateY(0); opacity: 0.5; }
-    50% { transform: translateY(8px); opacity: 1; }
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(6px); opacity: 0.9; }
   }
-
-  /* Fade-in-up for scroll reveals */
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  /* Stagger delay utilities */
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-
-  /* Card hover lift (Huglo blog cards) */
-  .card-huglo {
-    @apply rounded-2xl border border-huglo-grey-light bg-white transition-all duration-300;
-  }
-  .card-huglo:hover {
-    @apply -translate-y-1 bg-huglo-black/[0.02] shadow-lg shadow-huglo-black/5;
-  }
-
-  /* Hero form card (Huglo embedded form style) */
-  .hero-form-card {
-    @apply rounded-3xl border border-white/10 bg-white/95 p-8 shadow-2xl backdrop-blur-sm;
-  }
-
-  /* Floating badge animation */
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-  .animate-float-delay-1 { animation-delay: 0.5s; }
-  .animate-float-delay-2 { animation-delay: 1s; }
 }

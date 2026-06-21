@@ -42,7 +42,7 @@ export function AnimatedCounter({ value, label, dark = false }: AnimatedCounterP
 
   return (
     <div ref={ref} className="text-center">
-      <div className="font-heading text-4xl font-bold text-huglo-gold lg:text-5xl">
+      <div className="font-heading text-3xl font-bold text-huglo-gold sm:text-4xl">
         {display}
       </div>
       <div

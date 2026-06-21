@@ -22,29 +22,24 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "max-w-3xl",
+        "max-w-2xl",
         align === "center" && "mx-auto text-center",
         className
       )}
     >
       {eyebrow && (
-        <span
-          className={cn(
-            "mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em]",
-            dark ? "text-huglo-gold" : "text-huglo-gold"
-          )}
-        >
+        <span className="mb-3 inline-block text-xs font-bold uppercase tracking-[0.18em] text-huglo-gold">
           {eyebrow}
         </span>
       )}
       <h2
         className={cn(
-          "font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-tight",
+          "font-heading text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl",
           dark ? "text-white" : "text-huglo-black"
         )}
       >
@@ -53,8 +48,8 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            "mt-5 text-lg leading-relaxed",
-            dark ? "text-white/70" : "text-huglo-grey"
+            "mt-4 text-base leading-relaxed sm:text-lg",
+            dark ? "text-white/60" : "text-huglo-grey"
           )}
         >
           {description}
