@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, CheckCircle2, Sparkles, DollarSign } from "lucide-react";
+import { Sparkles, DollarSign } from "lucide-react";
 import { SOLAR_PACKAGES } from "@/lib/constants";
 import {
   formatBillRange,
@@ -12,11 +12,13 @@ import {
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { PackageQuoteModal } from "@/components/shared/PackageQuoteModal";
+import { PackageDetailsModal } from "@/components/shared/PackageDetailsModal";
 import { cn } from "@/lib/utils";
 
 export function PackagesSection() {
   const [billInput, setBillInput] = useState("");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
 
@@ -27,9 +29,11 @@ export function PackagesSection() {
   );
 
   const recommendedPackage = SOLAR_PACKAGES.find((pkg) => pkg.id === recommendedId);
+  const selectedPackage = SOLAR_PACKAGES.find((pkg) => pkg.id === selectedPackageId) ?? null;
 
-  const toggleExpanded = (id: string) => {
-    setExpandedId((current) => (current === id ? null : id));
+  const openDetails = (id: string) => {
+    setSelectedPackageId(id);
+    setDetailsOpen(true);
   };
 
   const openQuote = (defaultService: string) => {
@@ -130,7 +134,6 @@ export function PackagesSection() {
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {SOLAR_PACKAGES.map((pkg) => {
-              const isExpanded = expandedId === pkg.id;
               const isRecommended = recommendedId === pkg.id;
               const hasSelection = recommendedId !== null;
               const isDimmed = hasSelection && !isRecommended;
@@ -197,55 +200,16 @@ export function PackagesSection() {
                       </span>
                     </p>
 
-                    <AnimatePresence initial={false}>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="mt-6 space-y-5 border-t border-huglo-grey-light/60 pt-6 text-left">
-                            {pkg.details.map((section) => (
-                              <div key={section.title}>
-                                <h4 className="text-sm font-bold text-huglo-black">
-                                  {section.title}
-                                </h4>
-                                <ul className="mt-2 space-y-2">
-                                  {section.items.map((item) => (
-                                    <li
-                                      key={item}
-                                      className="flex items-start gap-2 text-xs leading-relaxed text-huglo-grey sm:text-sm"
-                                    >
-                                      <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-huglo-gold" />
-                                      <span>{item}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
                     <div className="mt-auto flex flex-col gap-3 pt-6 sm:flex-row sm:justify-center">
                       <button
                         type="button"
-                        onClick={() => toggleExpanded(pkg.id)}
+                        onClick={() => openDetails(pkg.id)}
                         className={cn(
                           "btn-huglo-outline btn-sm flex-1 sm:flex-none",
-                          (isExpanded || isRecommended) && "border-huglo-gold"
+                          isRecommended && "border-huglo-gold"
                         )}
                       >
                         View More
-                        <ChevronDown
-                          className={cn(
-                            "size-4 transition-transform duration-200",
-                            isExpanded && "rotate-180"
-                          )}
-                        />
                       </button>
                       <button
                         type="button"
@@ -265,6 +229,13 @@ export function PackagesSection() {
           </div>
         </div>
       </section>
+
+      <PackageDetailsModal
+        open={detailsOpen}
+        onClose={() => setDetailsOpen(false)}
+        package={selectedPackage}
+        onGetQuote={openQuote}
+      />
 
       <PackageQuoteModal
         open={quoteOpen}

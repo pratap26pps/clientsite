@@ -10,6 +10,7 @@ import {
 } from "@/lib/seo";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { SunLoader } from "@/components/shared/SunLoader";
+import { SolarChatbot } from "@/components/shared/SolarChatbot";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <SolarChatbot />
       </body>
     </html>
   );

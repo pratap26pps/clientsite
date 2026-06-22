@@ -228,6 +228,8 @@ export const PARTNER_LOGOS = [
   { name: "Trina Solar", src: "/partners/trina.png" },
   { name: "Fronius", src: "/partners/fronius.png" },
   { name: "Growatt", src: "/partners/growatt.png" },
+  { name: "SMA", src: "/partners/sma.png" },
+  { name: "Solax Power", src: "/partners/solax.png" },
 ] as const;
 
 export const SOLAR_PANELS = [
