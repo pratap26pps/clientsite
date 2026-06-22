@@ -95,13 +95,4 @@ router.post("/", upload.single("billFile"), async (req, res) => {
   }
 });
 
-router.get("/", async (_req, res) => {
-  try {
-    const quotes = await Quote.find().sort({ createdAt: -1 }).limit(50);
-    res.json(quotes);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch quotes" });
-  }
-});
-
 export default router;
