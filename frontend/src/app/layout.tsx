@@ -9,6 +9,7 @@ import {
   faqSchema,
 } from "@/lib/seo";
 import { JsonLd } from "@/components/shared/JsonLd";
+import { SunLoader } from "@/components/shared/SunLoader";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
@@ -19,11 +20,13 @@ const poppins = Poppins({
   display: "swap",
 });
 
-export const metadata: Metadata = createMetadata({
-  title: "Capital Solar Energy — Premium Solar Canberra",
-  description: SITE.description,
-  path: "/",
-});
+export const metadata: Metadata = {
+  ...createMetadata({
+    title: "Capital Solar Energy — Premium Solar Canberra",
+    description: SITE.description,
+    path: "/",
+  }),
+};
 
 export default function RootLayout({
   children,
@@ -38,6 +41,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <SunLoader />
         <Header />
         <main>{children}</main>
         <Footer />

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { SITE, LOCATION_PAGES, SERVICES } from "@/lib/constants";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 
 export function Footer() {
   return (
@@ -8,19 +9,7 @@ export function Footer() {
       <div className="container-wide section-padding pb-8">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-huglo-gold">
-                <span className="font-heading text-lg font-bold text-huglo-black">C</span>
-              </div>
-              <div>
-                <div className="font-heading text-lg font-bold">
-                  Capital Solar Energy
-                </div>
-                <div className="text-xs uppercase tracking-widest text-white/50">
-                  Canberra&apos;s Premium Solar
-                </div>
-              </div>
-            </Link>
+            <BrandLogo variant="footer" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">
               {SITE.description}
             </p>

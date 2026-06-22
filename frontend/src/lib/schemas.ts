@@ -36,6 +36,23 @@ export const quoteFormSchema = z.object({
 
 export type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
+export const packageQuoteFormSchema = z.object({
+  firstName: z
+    .string()
+    .min(1, "Please enter your first name")
+    .max(100, "Name is too long"),
+  mobile: z
+    .string()
+    .min(10, "Please enter a valid mobile number")
+    .regex(/^[\d\s+()-]+$/, "Please enter a valid mobile number"),
+  email: z.string().email("Please enter a valid email address"),
+  service: z.string().min(1, "Please select a service"),
+  address: z.string().min(5, "Please enter your address"),
+  message: z.string().max(1000, "Message is too long").optional(),
+});
+
+export type PackageQuoteFormData = z.infer<typeof packageQuoteFormSchema>;
+
 export const BILL_RANGES = [
   { value: "under-300", label: "Under $300 / quarter" },
   { value: "300-500", label: "$300 – $500 / quarter" },

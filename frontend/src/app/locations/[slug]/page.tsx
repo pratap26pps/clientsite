@@ -9,7 +9,6 @@ import {
   serviceSchema,
 } from "@/lib/seo";
 import { JsonLd } from "@/components/shared/JsonLd";
-import { QuoteFormSection } from "@/components/sections/QuoteFormSection";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -65,13 +64,13 @@ export default async function LocationPage({ params }: Props) {
             {page.description}
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#quote-form"
+            <Link
+              href="/quote"
               className="inline-flex h-12 items-center rounded-full bg-solar-orange px-8 font-semibold text-white shadow-lg shadow-solar-orange/30 transition-colors hover:bg-solar-orange-light"
             >
               Get Free Quote
               <ArrowRight className="ml-2 size-4" />
-            </a>
+            </Link>
             <a
               href={SITE.phoneHref}
               className="inline-flex h-12 items-center rounded-full border border-white/30 bg-white/10 px-8 font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
@@ -108,8 +107,6 @@ export default async function LocationPage({ params }: Props) {
           </div>
         </div>
       </section>
-
-      <QuoteFormSection />
     </>
   );
 }

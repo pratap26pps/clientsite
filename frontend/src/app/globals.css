@@ -223,4 +223,52 @@
     0%, 100% { transform: translateY(0); opacity: 0.4; }
     50% { transform: translateY(6px); opacity: 0.9; }
   }
+
+  /* ── Sun loader (Arena-style splash) ── */
+  .sun-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0f1e;
+    transition:
+      opacity 0.6s,
+      visibility 0.6s;
+  }
+
+  .sun-loader-hide {
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .loader-sun {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b00, #ffb800);
+    box-shadow:
+      0 0 40px #ff6b00,
+      0 0 80px #ffb800;
+    animation: pulse-sun 1.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-sun {
+    0%,
+    100% {
+      transform: scale(1);
+      box-shadow:
+        0 0 40px #ff6b00,
+        0 0 80px #ffb800;
+    }
+
+    50% {
+      transform: scale(1.2);
+      box-shadow:
+        0 0 60px #ff6b00,
+        0 0 120px #ffb800;
+    }
+  }
 }

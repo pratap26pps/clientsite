@@ -10,6 +10,17 @@ export const SITE = {
     "Premium Tier-1 solar systems, smart battery storage, and energy-efficient heat pumps custom-designed for Canberra and Southern NSW homes.",
 } as const;
 
+export const HERO_SHOWCASE = {
+  image: "/hero-solar-home.png",
+  imageAlt: "Modern Canberra home with solar panels at sunset",
+  cecBadge: "CEC Approved Retailer",
+  familiesCount: "500+",
+  familiesLabel: "happy Canberra families installed",
+  savingsAmount: "$3,200",
+  savingsLabel: "avg. annual savings per Canberra home",
+  availability: "Canberra available now",
+} as const;
+
 export const TRUST_BADGES = [
   { label: "CEC Approved Retailer", icon: "shield-check" },
   { label: "100% Locally Owned", icon: "map-pin" },
@@ -72,6 +83,152 @@ export const SAVINGS_SECTION = {
   footerNote:
     "Average Annual Savings: $1,800 – $4,500 per year for a typical Canberra household with a 6.6kW system + battery.",
 } as const;
+
+export const PACKAGE_SERVICE_OPTIONS = [
+  { value: "", label: "Select a Package" },
+  { value: "solar-panels-6-6kw", label: "Solar Panels 6.6kW" },
+  { value: "solar-panels-10kw", label: "Solar Panels 10kW" },
+  { value: "solar-panels-13kw", label: "Solar Panels 13kW" },
+  { value: "sigenergy", label: "Sigenergy" },
+  { value: "growatt", label: "Growatt" },
+  { value: "sungrow", label: "Sungrow" },
+  { value: "battery-solar-sigenergy", label: "Battery Solar Sigenergy" },
+  { value: "battery-solar-growatt", label: "Battery Solar Growatt" },
+  { value: "battery-solar-sungrow", label: "Battery Solar Sungrow" },
+] as const;
+
+export const SOLAR_PACKAGES = [
+  {
+    id: "small",
+    name: "Small Home",
+    size: "6.6kW",
+    panels: "18 x 370 = 6,660W",
+    headerColor: "bg-huglo-green",
+    defaultService: "solar-panels-6-6kw",
+    billMin: 1,
+    billMax: 500,
+    billHint: "Best for lower usage homes and smaller quarterly bills",
+    details: [
+      {
+        title: "Solar Panels",
+        items: [
+          "18 X 370W = 6,660W of Solar Panels Power Output",
+          "Jinko or Trina Solar Panels",
+          "High Efficiency Solar Panels",
+          "Canberra based solar installer",
+          "25 Years of Panel Linear Output Warranty",
+        ],
+      },
+      {
+        title: "Solar Inverter",
+        items: [
+          "5kW Solis or Growatt Inverter",
+          "High performance Inverter",
+          "Proven Track Record",
+          "Monitoring on APP",
+        ],
+      },
+      {
+        title: "Solar Installation",
+        items: [
+          "CEC approved retailer",
+          "Licenced electricians",
+          "Experienced installers",
+        ],
+      },
+    ],
+  },
+  {
+    id: "medium",
+    name: "Medium Home",
+    size: "10kW",
+    panels: "27 x 370 = 9,990W",
+    headerColor: "bg-[#1a2744]",
+    defaultService: "solar-panels-10kw",
+    billMin: 501,
+    billMax: 950,
+    billHint: "Ideal for average Canberra family electricity usage",
+    details: [
+      {
+        title: "Solar Panels",
+        items: [
+          "27 X 370W = 9,990W of Solar Panels Power Output",
+          "Jinko or Trina Solar Panels",
+          "High Efficiency Solar Panels",
+          "Canberra based solar installer",
+          "25 Years of Panel Linear Output Warranty",
+        ],
+      },
+      {
+        title: "Solar Inverter",
+        items: [
+          "5kW Solis or Growatt Inverter",
+          "High performance Inverter",
+          "Proven Track Record",
+          "Monitoring on APP",
+        ],
+      },
+      {
+        title: "Solar Installation",
+        items: [
+          "CEC approved retailer",
+          "Licenced electricians",
+          "Experienced installers",
+        ],
+      },
+    ],
+  },
+  {
+    id: "large",
+    name: "Big Family Home",
+    size: "13kW",
+    panels: "36 x 370 = 13,320W",
+    headerColor: "bg-huglo-gold",
+    defaultService: "solar-panels-13kw",
+    billMin: 951,
+    billMax: null,
+    billHint: "Perfect for large homes and high electricity consumption",
+    details: [
+      {
+        title: "Solar Panels",
+        items: [
+          "36 X 370W = 13,320W of Solar Panels Power Output",
+          "Jinko or Trina Solar Panels",
+          "High Efficiency Solar Panels",
+          "Canberra based solar installer",
+          "25 Years of Panel Linear Output Warranty",
+        ],
+      },
+      {
+        title: "Solar Inverter",
+        items: [
+          "5kW Solis or Growatt Inverter",
+          "High performance Inverter",
+          "Proven Track Record",
+          "Monitoring on APP",
+        ],
+      },
+      {
+        title: "Solar Installation",
+        items: [
+          "CEC approved retailer",
+          "Licenced electricians",
+          "Experienced installers",
+        ],
+      },
+    ],
+  },
+] as const;
+
+export const PARTNER_LOGOS = [
+  { name: "Solis Inverters", src: "/partners/solis.png" },
+  { name: "Jinko Solar", src: "/partners/jinko.png" },
+  { name: "SolarEdge", src: "/partners/solaredge.png" },
+  { name: "SunPower", src: "/partners/sunpower.png" },
+  { name: "Trina Solar", src: "/partners/trina.png" },
+  { name: "Fronius", src: "/partners/fronius.png" },
+  { name: "Growatt", src: "/partners/growatt.png" },
+] as const;
 
 export const SOLAR_PANELS = [
   {

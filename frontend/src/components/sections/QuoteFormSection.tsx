@@ -25,7 +25,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 
 const STEPS = ["Your Details", "Property Info", "Upload Bill"];
 
-export function QuoteFormSection() {
+export function QuoteFormSection({ standalone = false }: { standalone?: boolean }) {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -105,10 +105,13 @@ export function QuoteFormSection() {
   };
 
   const progress = ((step + 1) / STEPS.length) * 100;
+  const sectionClass = standalone
+    ? "pb-16 lg:pb-24"
+    : "section-padding bg-warm-white";
 
   if (submitted) {
     return (
-      <section id="quote-form" className="section-padding bg-warm-white">
+      <section id="quote-form" className={sectionClass}>
         <div className="container-wide">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -130,7 +133,7 @@ export function QuoteFormSection() {
   }
 
   return (
-    <section id="quote-form" className="section-padding bg-warm-white">
+    <section id="quote-form" className={sectionClass}>
       <div className="container-wide">
         <SectionHeading
           eyebrow="Get in touch with our energy experts"

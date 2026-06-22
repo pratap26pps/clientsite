@@ -1,13 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 export function ConversionBanner() {
-  const scrollToQuote = () => {
-    document.getElementById("quote-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section className="section-padding relative overflow-hidden bg-huglo-black-bg">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,172,0,0.06),transparent_70%)]" />
@@ -29,13 +26,13 @@ export function ConversionBanner() {
             and budget — not off-the-shelf packages.
           </p>
 
-          <button
-            onClick={scrollToQuote}
-            className="btn-huglo-gold btn-lg group mt-8"
+          <Link
+            href="/quote"
+            className="btn-huglo-gold btn-lg group mt-8 inline-flex"
           >
             Get a quote
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-          </button>
+          </Link>
 
           <p className="mt-4 text-xs text-white/35 sm:text-sm">
             No obligation · Free on-site assessment · Response within 24 hours

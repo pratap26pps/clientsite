@@ -2,28 +2,36 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, X } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#technology", label: "Products" },
-  { href: "#services", label: "Services" },
-  { href: "#process", label: "Process" },
-  { href: "#testimonials", label: "Reviews" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#packages", label: "Packages" },
+  { href: "/#technology", label: "Products" },
+  { href: "/#services", label: "Services" },
+  { href: "/#process", label: "Process" },
+  { href: "/#testimonials", label: "Reviews" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const darkHeader = !isHome || scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -32,41 +40,22 @@ export function Header() {
     };
   }, [mobileOpen]);
 
-  const scrollToQuote = () => {
-    setMobileOpen(false);
-    document.getElementById("quote-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <>
       <header
         className={cn(
           "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
-          scrolled ? "glass-dark py-3" : "bg-transparent py-4 sm:py-5"
+          darkHeader ? "glass-dark py-3" : "bg-transparent py-4 sm:py-5"
         )}
       >
         <div className="container-wide flex items-center justify-between px-5 sm:px-6 lg:px-8">
-          <Link href="/" className="group flex items-center gap-2.5">
-            <div className="flex size-9 items-center justify-center rounded-lg bg-huglo-gold transition-transform duration-200 group-hover:scale-[1.03] sm:size-10 sm:rounded-xl">
-              <span className="font-heading text-base font-bold text-huglo-black sm:text-lg">
-                C
-              </span>
-            </div>
-            <div className="hidden sm:block">
-              <div className="font-heading text-sm font-bold tracking-tight text-white">
-                Capital Solar
-              </div>
-              <div className="text-[10px] font-medium uppercase tracking-widest text-white/50">
-                Energy
-              </div>
-            </div>
-          </Link>
+          <BrandLogo variant="header" />
 
           <nav className="hidden items-center gap-7 lg:flex">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="nav-link-huglo">
+              <Link key={link.href} href={link.href} className="nav-link-huglo">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -78,9 +67,9 @@ export function Header() {
               <Phone className="size-3.5 text-huglo-gold" />
               {SITE.phone}
             </a>
-            <button onClick={scrollToQuote} className="btn-huglo-gold btn-sm">
+            <Link href="/quote" className="btn-huglo-gold btn-sm">
               Get a quote
-            </button>
+            </Link>
           </div>
 
           <button
@@ -118,14 +107,14 @@ export function Header() {
             >
               <div className="flex flex-col px-5">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
                     className="border-b border-white/10 py-4 text-base font-semibold text-white transition-colors hover:text-huglo-gold"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
                 <a
                   href={SITE.phoneHref}
@@ -134,12 +123,13 @@ export function Header() {
                   <Phone className="size-4" />
                   {SITE.phone}
                 </a>
-                <button
-                  onClick={scrollToQuote}
-                  className="btn-huglo-gold btn-md mt-4 w-full"
+                <Link
+                  href="/quote"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-huglo-gold btn-md mt-4 w-full text-center"
                 >
                   Get a quote
-                </button>
+                </Link>
               </div>
             </motion.nav>
           </>

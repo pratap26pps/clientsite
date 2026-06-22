@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -22,10 +23,6 @@ const featureIcons = {
 } as const;
 
 export function TrustSection() {
-  const scrollToQuote = () => {
-    document.getElementById("quote-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section className="bg-white">
       <div className="container-wide section-padding">
@@ -113,13 +110,13 @@ export function TrustSection() {
               })}
             </ul>
 
-            <button
-              onClick={scrollToQuote}
+            <Link
+              href="/quote"
               className="btn-huglo-gold btn-lg group mt-10 w-full sm:w-auto"
             >
               {SAVINGS_SECTION.cta}
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </button>
+            </Link>
           </ScrollReveal>
         </div>
 
@@ -141,13 +138,13 @@ export function TrustSection() {
               <Phone className="size-4" />
               Call Now
             </a>
-            <button
-              onClick={scrollToQuote}
+            <Link
+              href="/quote"
               className="flex size-10 items-center justify-center rounded-full bg-huglo-gold text-huglo-black transition-colors hover:bg-white"
               aria-label="Get a quote"
             >
               <Sun className="size-5" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
