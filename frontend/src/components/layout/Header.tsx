@@ -19,6 +19,10 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
+  const isAdmin = pathname.startsWith("/admin");
+
+  if (isAdmin) return null;
+
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);

@@ -1,9 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { SITE, LOCATION_PAGES, SERVICES } from "@/lib/constants";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <footer className="bg-huglo-black-bg text-white">
       <div className="container-wide section-padding pb-8">
