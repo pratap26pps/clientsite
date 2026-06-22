@@ -33,6 +33,38 @@ const upload = multer({
   },
 });
 
+router.post("/package", async (req, res) => {
+  try {
+    const { firstName, mobile, email, service, address, message } = req.body;
+
+    if (!firstName || !mobile || !email || !service || !address) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const quote = new Quote({
+      fullName: firstName,
+      phone: mobile,
+      email,
+      service,
+      address,
+      message: message || null,
+      electricityBill: service,
+      source: "package",
+    });
+
+    await quote.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Package quote request received",
+      id: quote._id,
+    });
+  } catch (error) {
+    console.error("Package quote submission error:", error);
+    res.status(500).json({ error: "Failed to submit quote request" });
+  }
+});
+
 router.post("/", upload.single("billFile"), async (req, res) => {
   try {
     const { fullName, phone, postcode, electricityBill } = req.body;
