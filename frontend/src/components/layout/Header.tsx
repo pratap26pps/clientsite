@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/#calculator", label: "Calculator" },
   { href: "/#process", label: "Process" },
   { href: "/#testimonials", label: "Reviews" },
+  { href: "/reviews", label: "See your reviews" },
   { href: "/#faq", label: "FAQ" },
 ];
 

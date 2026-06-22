@@ -1,38 +1,72 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
-import { TESTIMONIALS } from "@/lib/constants";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { ReviewCard } from "@/components/shared/ReviewCard";
+import {
+  fetchReviews,
+  staticTestimonialsToReviews,
+  getPositiveTopRatedReviews,
+  chunkReviews,
+  type Review,
+} from "@/lib/reviews";
+
+const CARDS_PER_VIEW = 4;
+const AUTO_INTERVAL = 6000;
 
 export function TestimonialsSection() {
-  const [current, setCurrent] = useState(0);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const next = useCallback(() => {
-    setDirection(1);
-    setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
+  const loadReviews = useCallback(async () => {
+    const apiReviews = await fetchReviews({ topRated: true });
+    const staticReviews = staticTestimonialsToReviews();
+    const merged = getPositiveTopRatedReviews([
+      ...staticReviews,
+      ...apiReviews,
+    ]);
+    setReviews(merged);
   }, []);
 
+  useEffect(() => {
+    loadReviews();
+    const onReviewSubmitted = () => loadReviews();
+    window.addEventListener("review-submitted", onReviewSubmitted);
+    return () => window.removeEventListener("review-submitted", onReviewSubmitted);
+  }, [loadReviews]);
+
+  const pages = useMemo(
+    () => chunkReviews(reviews, CARDS_PER_VIEW),
+    [reviews]
+  );
+
+  const next = useCallback(() => {
+    if (pages.length <= 1) return;
+    setDirection(1);
+    setCurrentPage((prev) => (prev + 1) % pages.length);
+  }, [pages.length]);
+
   const prev = () => {
+    if (pages.length <= 1) return;
     setDirection(-1);
-    setCurrent(
-      (prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length
-    );
+    setCurrentPage((prev) => (prev - 1 + pages.length) % pages.length);
   };
 
   useEffect(() => {
-    const timer = setInterval(next, 7000);
+    if (pages.length <= 1) return;
+    const timer = setInterval(next, AUTO_INTERVAL);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, pages.length]);
 
-  const testimonial = TESTIMONIALS[current];
+  const currentReviews = pages[currentPage] ?? [];
 
   const variants = {
-    enter: (d: number) => ({ x: d > 0 ? 40 : -40, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (d: number) => ({ x: d > 0 ? -40 : 40, opacity: 0 }),
+    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 30 : -30 }),
+    center: { opacity: 1, x: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d > 0 ? -30 : 30 }),
   };
 
   return (
@@ -45,94 +79,66 @@ export function TestimonialsSection() {
           dark
         />
 
-        <div className="relative mx-auto mt-12 max-w-3xl sm:mt-16">
-          <div className="flex items-stretch gap-3 sm:gap-4">
-            <button
-              onClick={prev}
-              className="btn-huglo-carousel self-center"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
+        <div className="relative mt-12 sm:mt-16">
+          <div className="flex items-center gap-3 sm:gap-4">
+            {pages.length > 1 && (
+              <button
+                onClick={prev}
+                className="btn-huglo-carousel hidden shrink-0 sm:flex"
+                aria-label="Previous reviews"
+              >
+                <ChevronLeft className="size-5" />
+              </button>
+            )}
 
-            <div className="min-w-0 flex-1">
+            <div className="min-w-0 flex-1 overflow-hidden">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
-                  key={current}
+                  key={currentPage}
                   custom={direction}
                   variants={variants}
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8"
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4"
                 >
-                  <Quote className="size-8 text-huglo-gold/30" />
-
-                  <p className="mt-5 text-base leading-relaxed text-white/85 sm:text-lg">
-                    &ldquo;{testimonial.text}&rdquo;
-                  </p>
-
-                  <div className="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <div className="font-heading font-bold">{testimonial.name}</div>
-                      <div className="text-sm text-white/45">{testimonial.location}</div>
-                      <div className="mt-1.5 flex">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className="size-3.5 fill-huglo-gold text-huglo-gold"
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex gap-3">
-                      <div className="rounded-xl border border-huglo-gold/20 bg-huglo-gold/10 px-3 py-2 text-center">
-                        <div className="text-[10px] uppercase tracking-wide text-white/45">
-                          Savings
-                        </div>
-                        <div className="font-heading text-sm font-bold text-huglo-gold">
-                          {testimonial.savings}
-                        </div>
-                      </div>
-                      <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
-                        <div className="text-[10px] uppercase tracking-wide text-white/45">
-                          System
-                        </div>
-                        <div className="text-sm font-semibold">{testimonial.system}</div>
-                      </div>
-                    </div>
-                  </div>
+                  {currentReviews.map((review) => (
+                    <ReviewCard key={review.id} review={review} compact />
+                  ))}
                 </motion.div>
               </AnimatePresence>
 
-              <div className="mt-5 flex justify-center gap-1.5">
-                {TESTIMONIALS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setDirection(i > current ? 1 : -1);
-                      setCurrent(i);
-                    }}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === current
-                        ? "w-6 bg-huglo-gold"
-                        : "w-1.5 bg-white/20 hover:bg-white/35"
-                    }`}
-                    aria-label={`Go to testimonial ${i + 1}`}
-                  />
-                ))}
-              </div>
+              {pages.length > 1 && (
+                <div className="mt-6 flex justify-center gap-1.5">
+                  {pages.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        setDirection(i > currentPage ? 1 : -1);
+                        setCurrentPage(i);
+                      }}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === currentPage
+                          ? "w-6 bg-huglo-gold"
+                          : "w-1.5 bg-white/20 hover:bg-white/35"
+                      }`}
+                      aria-label={`Go to review page ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
-            <button
-              onClick={next}
-              className="btn-huglo-carousel self-center"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="size-5" />
-            </button>
+            {pages.length > 1 && (
+              <button
+                onClick={next}
+                className="btn-huglo-carousel hidden shrink-0 sm:flex"
+                aria-label="Next reviews"
+              >
+                <ChevronRight className="size-5" />
+              </button>
+            )}
           </div>
         </div>
       </div>

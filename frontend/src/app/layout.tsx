@@ -11,6 +11,7 @@ import {
 import { JsonLd } from "@/components/shared/JsonLd";
 import { SunLoader } from "@/components/shared/SunLoader";
 import { SolarChatbot } from "@/components/shared/SolarChatbot";
+import { AddReviewButton } from "@/components/shared/AddReviewButton";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <AddReviewButton />
         <SolarChatbot />
       </body>
     </html>

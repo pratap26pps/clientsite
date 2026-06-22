@@ -53,6 +53,38 @@ export const packageQuoteFormSchema = z.object({
 
 export type PackageQuoteFormData = z.infer<typeof packageQuoteFormSchema>;
 
+export const reviewFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Please enter your name")
+    .max(100, "Name is too long"),
+  location: z
+    .string()
+    .min(2, "Please enter your location")
+    .max(100, "Location is too long"),
+  rating: z.number().min(1, "Please select a rating").max(5),
+  text: z
+    .string()
+    .min(20, "Review must be at least 20 characters")
+    .max(1000, "Review is too long"),
+  savings: z.string().max(100).optional(),
+  system: z.string().max(100).optional(),
+  photo: z
+    .instanceof(File)
+    .optional()
+    .refine(
+      (file) => !file || file.size <= 5 * 1024 * 1024,
+      "Photo must be less than 5MB"
+    )
+    .refine(
+      (file) =>
+        !file || ["image/jpeg", "image/png", "image/webp"].includes(file.type),
+      "Photo must be JPG, PNG, or WebP"
+    ),
+});
+
+export type ReviewFormData = z.infer<typeof reviewFormSchema>;
+
 export const BILL_RANGES = [
   { value: "under-300", label: "Under $300 / quarter" },
   { value: "300-500", label: "$300 – $500 / quarter" },

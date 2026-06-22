@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Bot, Leaf, Sparkles, TreePine, Zap } from "lucide-react";
@@ -60,8 +61,8 @@ export function CalculatorSection() {
           />
         </ScrollReveal>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
-          <ScrollReveal direction="left" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+        <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
+          <ScrollReveal direction="left" className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
             <h3 className="font-heading text-lg font-bold text-white sm:text-xl">
               Your Details
             </h3>
@@ -158,9 +159,32 @@ export function CalculatorSection() {
                 </div>
               </div>
             </div>
+
+            <div className="mt-auto rounded-xl border border-huglo-gold/20 bg-huglo-gold/5 p-5">
+              <p className="text-xs font-bold uppercase tracking-widest text-huglo-gold">
+                Why calculate now?
+              </p>
+              <ul className="mt-3 space-y-2 text-sm text-white/70">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-huglo-gold" />
+                  Instant estimates based on your actual usage
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-huglo-gold" />
+                  Compare system sizes and payback periods
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-huglo-gold" />
+                  No obligation — get a personalised quote next
+                </li>
+              </ul>
+              <Link href="/quote" className="btn-huglo-gold btn-sm mt-5 w-full text-center">
+                Get a free quote
+              </Link>
+            </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="right" delay={0.1} className="space-y-6">
+          <ScrollReveal direction="right" delay={0.1} className="flex h-full flex-col space-y-6">
             <div className="rounded-2xl border border-huglo-gold/25 bg-[linear-gradient(135deg,rgba(255,172,0,0.12),rgba(255,172,0,0.03))] p-6 sm:p-8">
               <div className="flex items-start gap-3">
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-huglo-gold/20">

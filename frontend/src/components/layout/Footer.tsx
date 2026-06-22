@@ -112,6 +112,12 @@ export function Footer() {
           </p>
           <div className="flex gap-6">
             <Link
+              href="/reviews"
+              className="text-xs font-semibold text-huglo-gold transition-colors duration-300 hover:text-white"
+            >
+              See your reviews
+            </Link>
+            <Link
               href="/privacy"
               className="text-xs text-white/40 transition-colors duration-300 hover:text-white"
             >

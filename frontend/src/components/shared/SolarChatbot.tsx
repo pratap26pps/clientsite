@@ -301,12 +301,21 @@ export function SolarChatbot() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={cn(
-          "fixed right-4 bottom-5 z-[9000] flex size-14 items-center justify-center rounded-full shadow-[0_12px_40px_-8px_rgba(255,172,0,0.55)] sm:right-6 sm:bottom-6",
-          open ? "bg-huglo-black text-white" : "bg-huglo-gold text-huglo-black"
+          "fixed right-4 bottom-5 z-[9000] flex items-center gap-2 rounded-full shadow-[0_12px_40px_-8px_rgba(255,172,0,0.55)] sm:right-6 sm:bottom-6",
+          open
+            ? "size-14 justify-center bg-huglo-black text-white"
+            : "bg-huglo-gold px-4 py-3 text-huglo-black sm:px-5"
         )}
         aria-label={open ? "Close AI Solar Assistant" : "Open AI Solar Assistant"}
       >
-        {open ? <X className="size-6" /> : <MessageCircle className="size-6" />}
+        {open ? (
+          <X className="size-6" />
+        ) : (
+          <>
+            <MessageCircle className="size-5 shrink-0 sm:size-6" />
+            <span className="text-xs font-bold sm:text-sm">AI Chat</span>
+          </>
+        )}
       </motion.button>
     </>
   );
