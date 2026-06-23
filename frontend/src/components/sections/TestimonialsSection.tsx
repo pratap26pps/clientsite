@@ -8,7 +8,7 @@ import { ReviewCard } from "@/components/shared/ReviewCard";
 import {
   fetchReviews,
   staticTestimonialsToReviews,
-  getPositiveTopRatedReviews,
+  sortReviewsTopRated,
   chunkReviews,
   type Review,
 } from "@/lib/reviews";
@@ -22,12 +22,9 @@ export function TestimonialsSection() {
   const [direction, setDirection] = useState(0);
 
   const loadReviews = useCallback(async () => {
-    const apiReviews = await fetchReviews({ topRated: true });
+    const apiReviews = await fetchReviews();
     const staticReviews = staticTestimonialsToReviews();
-    const merged = getPositiveTopRatedReviews([
-      ...staticReviews,
-      ...apiReviews,
-    ]);
+    const merged = sortReviewsTopRated([...staticReviews, ...apiReviews]);
     setReviews(merged);
   }, []);
 
