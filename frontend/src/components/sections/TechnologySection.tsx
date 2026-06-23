@@ -79,7 +79,7 @@ export function TechnologySection() {
                 className="relative aspect-[4/3] overflow-hidden rounded-3xl"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=85"
+                  src="/products/solar-array.jpg"
                   alt="Premium solar panel installation"
                   fill
                   className="object-cover"
@@ -250,7 +250,7 @@ export function TechnologySection() {
                 className="relative order-1 aspect-[4/3] overflow-hidden rounded-3xl lg:order-2"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1558446120-e0589ebde7fc?w=800&q=85"
+                  src="/products/battery-advantage.jpg"
                   alt="Home battery storage system"
                   fill
                   className="object-cover"

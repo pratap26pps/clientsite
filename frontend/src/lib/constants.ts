@@ -304,7 +304,7 @@ export const SERVICES = [
     description:
       "Custom-engineered solar systems using Tier-1 panels and premium inverters — designed for maximum generation on your specific roof.",
     icon: "sun",
-    href: "/locations/solar-installation-canberra",
+    href: "/solar",
   },
   {
     id: "battery",
@@ -312,7 +312,7 @@ export const SERVICES = [
     description:
       "Store excess solar energy and power your home through outages. Tesla Powerwall 3 and Sigenergy systems available.",
     icon: "battery",
-    href: "/locations/battery-storage-canberra",
+    href: "/battery",
   },
   {
     id: "heat-pump",

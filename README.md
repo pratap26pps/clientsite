@@ -57,12 +57,13 @@ Requires MongoDB running locally or a MongoDB Atlas connection string.
 
 1. Connect repository to Vercel
 2. Set root directory to `frontend`
-3. Add environment variable: `NEXT_PUBLIC_API_URL=https://your-api-domain.com`
+3. Add environment variable: `NEXT_PUBLIC_API_URL=https://your-api-domain.com` (must use **https**)
 
 ### Backend (VPS/AWS)
 
 1. Deploy backend folder to your server
 2. Set environment variables from `.env.example`
+3. Set `CORS_ORIGIN` to your Vercel URL(s), e.g. `http://localhost:3000,https://clientsite-psi.vercel.app`
 3. Run with PM2: `pm2 start src/index.js --name capital-solar-api`
 4. Configure reverse proxy (nginx) for HTTPS
 

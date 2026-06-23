@@ -110,12 +110,18 @@ export function Footer() {
             © {new Date().getFullYear()} {SITE.name}. All rights reserved. CEC
             Approved Retailer.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
             <Link
-              href="/reviews"
+              href="/government-loans"
               className="text-xs font-semibold text-huglo-gold transition-colors duration-300 hover:text-white"
             >
-              See your reviews
+              Gov&apos;t Loans
+            </Link>
+            <Link
+              href="/reviews"
+              className="text-xs text-white/40 transition-colors duration-300 hover:text-white"
+            >
+              Reviews
             </Link>
             <Link
               href="/privacy"

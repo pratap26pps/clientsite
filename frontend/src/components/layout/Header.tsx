@@ -10,12 +10,14 @@ import { BrandLogo } from "@/components/shared/BrandLogo";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/solar", label: "Solar" },
+  { href: "/battery", label: "Battery" },
+  { href: "/government-loans", label: "Gov't Loans" },
   { href: "/#packages", label: "Packages" },
   { href: "/#calculator", label: "Calculator" },
   { href: "/#process", label: "Process" },
-  { href: "/#testimonials", label: "Reviews" },
-  { href: "/reviews", label: "See your reviews" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/reviews", label: "Reviews" },
 ];
 
 export function Header() {
@@ -55,12 +57,25 @@ export function Header() {
         <div className="container-wide flex items-center justify-between px-5 sm:px-6 lg:px-8">
           <BrandLogo variant="header" />
 
-          <nav className="hidden items-center gap-7 lg:flex">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="nav-link-huglo">
-                {link.label}
-              </Link>
-            ))}
+          <nav className="hidden items-center gap-5 xl:flex">
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname === link.href || pathname.startsWith(`${link.href}/`);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "nav-link-huglo",
+                    isActive && "text-huglo-gold"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="hidden items-center gap-5 lg:flex">
