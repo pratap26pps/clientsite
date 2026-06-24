@@ -121,7 +121,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     ],
     idealFor:
       "Homes wanting a premium all-in-one battery with seamless backup and monitoring.",
-    image: "/products/battery-unit.jpg",
+    image: "/products/tesla-powerwall-3.jpg",
   },
   {
     id: "sigenergy-sigenstor",
@@ -191,7 +191,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     ],
     idealFor:
       "Homes looking for a premium, scalable battery solution with excellent performance and reliability.",
-    image: "/products/sungrow-sbr.png",
+    image: "/products/sungrow-sbr.jpg",
   },
   {
     id: "goodwe-esa",
@@ -262,7 +262,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     ],
     idealFor:
       "Homeowners seeking a cost-effective, expandable battery that integrates seamlessly with FoxESS hybrid inverters.",
-    image: "/products/battery-unit.jpg",
+    image: "/products/foxess-ecs.png",
   },
 ];
 

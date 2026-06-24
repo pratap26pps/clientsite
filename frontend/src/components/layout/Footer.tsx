@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { SITE, LOCATION_PAGES, SERVICES } from "@/lib/constants";
+import { SITE, SERVICES } from "@/lib/constants";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 
 export function Footer() {
@@ -25,7 +25,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-huglo-gold">
               Services
             </h4>
@@ -43,25 +43,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-huglo-gold">
-              Locations
-            </h4>
-            <ul className="space-y-3">
-              {LOCATION_PAGES.slice(0, 5).map((page) => (
-                <li key={page.slug}>
-                  <Link
-                    href={`/locations/${page.slug}`}
-                    className="text-sm text-white/60 transition-colors duration-300 hover:text-huglo-gold"
-                  >
-                    {page.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-5">
             <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-huglo-gold">
               Contact
             </h4>

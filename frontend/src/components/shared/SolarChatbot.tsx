@@ -22,7 +22,7 @@ type Message = {
 };
 
 function renderMessageContent(content: string) {
-  const parts = content.split(/(\*\*[^*]+\*\*|\n|\/quote|\/locations\/[^\s]+|\/#calculator|\/#packages)/g);
+  const parts = content.split(/(\*\*[^*]+\*\*|\n|\/quote|\/battery|\/government-loans|\/reviews|\/locations\/[^\s]+|\/#calculator|\/#packages|https?:\/\/[^\s]+)/g);
 
   return parts.map((part, index) => {
     if (part.startsWith("**") && part.endsWith("**")) {
@@ -49,6 +49,42 @@ function renderMessageContent(content: string) {
       );
     }
 
+    if (part === "/battery") {
+      return (
+        <Link
+          key={index}
+          href="/battery"
+          className="font-semibold text-huglo-gold underline underline-offset-2"
+        >
+          battery storage page
+        </Link>
+      );
+    }
+
+    if (part === "/government-loans") {
+      return (
+        <Link
+          key={index}
+          href="/government-loans"
+          className="font-semibold text-huglo-gold underline underline-offset-2"
+        >
+          government loans page
+        </Link>
+      );
+    }
+
+    if (part === "/reviews") {
+      return (
+        <Link
+          key={index}
+          href="/reviews"
+          className="font-semibold text-huglo-gold underline underline-offset-2"
+        >
+          customer reviews
+        </Link>
+      );
+    }
+
     if (part.startsWith("/locations/")) {
       return (
         <Link
@@ -58,6 +94,20 @@ function renderMessageContent(content: string) {
         >
           learn more
         </Link>
+      );
+    }
+
+    if (part.startsWith("http://") || part.startsWith("https://")) {
+      return (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-huglo-gold underline underline-offset-2 break-all"
+        >
+          official government page
+        </a>
       );
     }
 
@@ -172,6 +222,16 @@ export function SolarChatbot() {
       return;
     }
 
+    if (actionId === "batteries") {
+      addBotReply(getQuickActionResponse("batteries"));
+      return;
+    }
+
+    if (actionId === "quote") {
+      addBotReply(getQuickActionResponse("quote"));
+      return;
+    }
+
     addBotReply(getQuickActionResponse(actionId));
   };
 
@@ -197,7 +257,7 @@ export function SolarChatbot() {
                       AI Solar Assistant
                     </h3>
                     <p className="text-xs text-white/55">
-                      Powered by advanced solar analytics
+                      Capital Solar Energy · Canberra
                     </p>
                   </div>
                 </div>

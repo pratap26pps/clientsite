@@ -24,6 +24,50 @@ export function GovernmentLoansPageClient() {
         description={GOVERNMENT_LOANS_PAGE.hero.description}
       />
 
+      <section className="border-b border-charcoal/10 bg-white py-6 sm:py-8">
+        <div className="container-wide">
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-charcoal/50">
+            Verify eligibility on official government sites
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <a
+              href={ACT_SHS_SCHEME.officialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between gap-4 rounded-2xl border-2 border-huglo-green bg-huglo-green/10 px-5 py-4 shadow-sm transition-all hover:border-huglo-green hover:bg-huglo-green hover:shadow-lg hover:shadow-huglo-green/20 sm:px-6 sm:py-5"
+            >
+              <div>
+                <span className="text-lg">🟢</span>
+                <p className="mt-1 font-heading text-base font-bold text-charcoal group-hover:text-white sm:text-lg">
+                  Official ACT SHS Page
+                </p>
+                <p className="mt-0.5 text-xs text-charcoal/60 group-hover:text-white/80 sm:text-sm">
+                  ACT Sustainable Household Scheme — climatechoices.act.gov.au
+                </p>
+              </div>
+              <ExternalLink className="size-5 shrink-0 text-huglo-green transition-colors group-hover:text-white sm:size-6" />
+            </a>
+            <a
+              href={NSW_HES_SCHEME.officialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between gap-4 rounded-2xl border-2 border-blue-600 bg-blue-50 px-5 py-4 shadow-sm transition-all hover:border-blue-600 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-600/20 sm:px-6 sm:py-5"
+            >
+              <div>
+                <span className="text-lg">🔵</span>
+                <p className="mt-1 font-heading text-base font-bold text-charcoal group-hover:text-white sm:text-lg">
+                  Official NSW Home Energy Saver Page
+                </p>
+                <p className="mt-0.5 text-xs text-charcoal/60 group-hover:text-white/80 sm:text-sm">
+                  NSW Home Energy Saver Program — energy.nsw.gov.au
+                </p>
+              </div>
+              <ExternalLink className="size-5 shrink-0 text-blue-600 transition-colors group-hover:text-white sm:size-6" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="section-padding bg-warm-white">
         <div className="container-wide">
           <div className="flex justify-center">
@@ -173,10 +217,10 @@ function ActSchemeContent() {
             href={ACT_SHS_SCHEME.officialLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-huglo-green hover:underline"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-huglo-green bg-huglo-green/10 px-5 py-2.5 text-sm font-bold text-huglo-green transition-colors hover:bg-huglo-green hover:text-white"
           >
             Official ACT SHS Page
-            <ExternalLink className="size-3.5" />
+            <ExternalLink className="size-4" />
           </a>
         </div>
       </div>
@@ -244,10 +288,10 @@ function NswSchemeContent() {
           href={NSW_HES_SCHEME.officialLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-huglo-green hover:underline"
+          className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-blue-600 bg-blue-50 px-5 py-2.5 text-sm font-bold text-blue-700 transition-colors hover:bg-blue-600 hover:text-white"
         >
           Official NSW Home Energy Saver Page
-          <ExternalLink className="size-3.5" />
+          <ExternalLink className="size-4" />
         </a>
       </div>
     </div>
