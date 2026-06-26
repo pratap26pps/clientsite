@@ -9,6 +9,7 @@ import {
   BATTERY_PAGE,
   BATTERY_PRODUCTS,
   type BatteryTag,
+  type BatterySpec,
 } from "@/lib/page-content";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +18,13 @@ const tagColors: Record<BatteryTag["color"], string> = {
   pink: "bg-pink-100 text-pink-700",
   green: "bg-emerald-100 text-emerald-700",
   teal: "bg-teal-100 text-teal-700",
+};
+
+const specColors: Record<string, string> = {
+  "DC Coupled": "text-purple-700",
+  "AC Coupled": "text-pink-700",
+  "Single Phase": "text-emerald-700",
+  "Three Phase": "text-teal-700",
 };
 
 export function BatteryPageClient() {
@@ -96,19 +104,21 @@ export function BatteryPageClient() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
-                  <div className="mb-3 flex flex-wrap gap-1.5">
-                    {product.tags.map((tag) => (
-                      <span
-                        key={tag.label}
-                        className={cn(
-                          "rounded-full px-2.5 py-0.5 text-[11px] font-semibold",
-                          tagColors[tag.color]
-                        )}
-                      >
-                        {tag.label}
-                      </span>
-                    ))}
-                  </div>
+                  {product.tags && product.tags.length > 0 && (
+                    <div className="mb-3 flex flex-wrap gap-1.5">
+                      {product.tags.map((tag) => (
+                        <span
+                          key={tag.label}
+                          className={cn(
+                            "rounded-full px-2.5 py-0.5 text-[11px] font-semibold",
+                            tagColors[tag.color]
+                          )}
+                        >
+                          {tag.label}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   <p className="text-xs font-semibold uppercase tracking-wider text-charcoal/50">
                     {product.brand}
@@ -116,6 +126,22 @@ export function BatteryPageClient() {
                   <h3 className="mt-1 font-heading text-xl font-bold text-charcoal">
                     {product.name}
                   </h3>
+
+                  <ul className="mt-3 space-y-2 border-b border-charcoal/10 pb-4">
+                    {product.specs.map((spec: BatterySpec) => (
+                      <li key={spec.title} className="text-sm leading-snug">
+                        <span
+                          className={cn(
+                            "font-semibold",
+                            specColors[spec.title] ?? "text-charcoal"
+                          )}
+                        >
+                          {spec.title}:
+                        </span>{" "}
+                        <span className="text-charcoal/70">{spec.description}</span>
+                      </li>
+                    ))}
+                  </ul>
 
                   <ul className="mt-4 flex-1 space-y-2.5">
                     {product.features.map((feature) => (

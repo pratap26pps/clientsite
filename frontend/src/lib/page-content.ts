@@ -49,6 +49,11 @@ export const SOLAR_PAGE = {
   },
 } as const;
 
+export type BatterySpec = {
+  title: string;
+  description: string;
+};
+
 export type BatteryTag = {
   label: string;
   color: "purple" | "pink" | "green" | "teal";
@@ -60,11 +65,31 @@ export type BatteryProduct = {
   name: string;
   badge?: string;
   badgeIcon?: string;
-  tags: BatteryTag[];
+  tags?: BatteryTag[];
+  specs: BatterySpec[];
   features: { title: string; description: string }[];
   idealFor: string;
   image?: string;
 };
+
+export const BATTERY_COUPLING_SPECS: BatterySpec[] = [
+  {
+    title: "DC Coupled",
+    description: "Direct solar-to-battery link for the highest charging efficiency",
+  },
+  {
+    title: "AC Coupled",
+    description: "Connects via your switchboard — ideal for retrofitting existing solar",
+  },
+  {
+    title: "Single Phase",
+    description: "Built for standard residential homes with single-phase power",
+  },
+  {
+    title: "Three Phase",
+    description: "Ready for larger homes and properties with 3-phase supply",
+  },
+];
 
 export const BATTERY_PAGE = {
   hero: {
@@ -96,11 +121,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     name: "Sigenstor 5-in-1",
     badge: "Exceptional Quality",
     badgeIcon: "★",
-    tags: [
-      { label: "DC Coupled", color: "purple" },
-      { label: "AC Coupled", color: "pink" },
-      { label: "Three Phase", color: "green" },
-    ],
+    specs: BATTERY_COUPLING_SPECS,
     features: [
       {
         title: "8–48 kWh Storage",
@@ -129,11 +150,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     name: "SBR Battery Series",
     badge: "Best Warranty",
     badgeIcon: "🏆",
-    tags: [
-      { label: "DC Coupled", color: "purple" },
-      { label: "Single Phase", color: "pink" },
-      { label: "Three Phase", color: "green" },
-    ],
+    specs: BATTERY_COUPLING_SPECS,
     features: [
       {
         title: "Modular Design",
@@ -166,12 +183,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     name: "ESA 8.0kWh Module",
     badge: "Best Value",
     badgeIcon: "✓",
-    tags: [
-      { label: "DC Coupled", color: "purple" },
-      { label: "AC Coupled", color: "pink" },
-      { label: "Single Phase", color: "green" },
-      { label: "Best Value", color: "teal" },
-    ],
+    specs: BATTERY_COUPLING_SPECS,
     features: [
       {
         title: "8 kWh Storage",
@@ -192,7 +204,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     ],
     idealFor:
       "Budget-conscious homeowners wanting reliable storage with room to grow.",
-    image: "/products/goodwe-esa.png",
+    image: "/products/goodwe-esa-8kwh.png",
   },
   {
     id: "foxess-ecs",
@@ -200,11 +212,7 @@ export const BATTERY_PRODUCTS: BatteryProduct[] = [
     name: "ECS / EP Battery Series",
     badge: "Expandable",
     badgeIcon: "＋",
-    tags: [
-      { label: "DC Coupled", color: "purple" },
-      { label: "Single Phase", color: "pink" },
-      { label: "Three Phase", color: "green" },
-    ],
+    specs: BATTERY_COUPLING_SPECS,
     features: [
       {
         title: "Modular Storage System",
@@ -310,11 +318,9 @@ export const ACT_SHS_SCHEME = {
       "The scheme has already helped thousands of Canberra households lower their energy costs. With the introduction of federal battery incentives and the increase to a $20,000 loan cap, battery storage and home electrification are becoming more affordable than ever.",
   },
   applySteps: [
-    { step: 1, title: "Check Eligibility", description: "ACT homeowners with a valid driver's licence (for EV loans) and meeting Brighte lending criteria." },
-    { step: 2, title: "Attend Free Workshop", description: "Complete a free 1-hour SHS eligibility workshop." },
-    { step: 3, title: "Get Your Capital Solar Quote", description: "We provide an itemised quote with eligible products and loan amounts." },
-    { step: 4, title: "Apply Through Brighte", description: "Submit your loan application with our guidance." },
-    { step: 5, title: "Installation & Savings", description: "Our local team installs your system — repay over up to 10 years." },
+    { step: 1, title: "Get Your Capital Solar Quote", description: "We provide an itemised quote with eligible products and loan amounts." },
+    { step: 2, title: "Apply Through Brighte", description: "Submit your loan application with our guidance." },
+    { step: 3, title: "Installation & Savings", description: "Our local team installs your system — repay over up to 10 years." },
   ],
   solarNote: {
     title: "Important: Solar Panels Not Currently Eligible",
