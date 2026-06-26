@@ -46,7 +46,7 @@ export function BatteryPageClient() {
                 href="/government-loans"
                 className="btn-huglo-outline btn-md mt-8 inline-flex items-center gap-2"
               >
-                Explore Government Loans
+                Explore Finance 
                 <ArrowRight className="size-4" />
               </Link>
             </div>

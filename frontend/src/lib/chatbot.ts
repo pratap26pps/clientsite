@@ -26,7 +26,7 @@ export const CHAT_WELCOME_MESSAGE = `G'day! I'm the Capital Solar Energy assista
 I can walk you through:
 ✓ System sizing & savings estimates
 ✓ ACT & NSW government loan programs
-✓ Battery storage options (Tesla, Sigenergy, Sungrow & more)
+✓ Battery storage options (Sigenergy, Sungrow, GoodWe & FoxESS)
 ✓ Our installation process & warranties
 
 What would you like to know? Feel free to ask anything — no sales pressure, just honest advice from your local Mitchell-based team.`;
@@ -55,7 +55,7 @@ Based on real installs across the ACT, households typically save **70–90%** on
 • **10kW** — from ~$9,500, saves ~$2,800–$3,400/year
 • **13kW** — from ~$11,500, saves ~$3,500–$4,500/year
 
-Add a battery and evening peak usage drops even further. One of our Belconnen customers (Sarah & Michael) cut their quarterly bill from $850 to under $120 with a 10kW + Powerwall 3 system.
+Add a battery and evening peak usage drops even further. One of our Belconnen customers (Sarah & Michael) cut their quarterly bill from $850 to under $120 with a 10kW + Sigenergy battery system.
 
 Try our **AI Calculator** on this page for a personalised estimate — or I can help you pick the right size if you tell me your typical quarterly bill.`,
 
@@ -87,7 +87,7 @@ ${packagesSummary()}
 **Hardware we install:**
 • **Panels:** Jinko Tiger Neo & Trina Vertex S+ (N-Type, 25-year warranty)
 • **Inverters:** Solis, Growatt, SMA, Fronius & SolarEdge
-• **Batteries:** Tesla Powerwall 3, Sigenergy SigenStor, Sungrow SBR, GoodWe ESA & FoxESS
+• **Batteries:** Sigenergy SigenStor, Sungrow SBR, GoodWe ESA & FoxESS
 
 Every system is installed by **ACT licensed electricians** — we're a **CEC Approved Retailer** based at **46 Hoskins Street, Mitchell ACT**.
 
@@ -102,9 +102,9 @@ ${batterySummary()}
 Store cheap daytime solar and use it during expensive peak rates (typically 4–9pm). Plus whole-home backup during outages.
 
 **Popular picks:**
-• **Tesla Powerwall 3** — 13.5 kWh all-in-one, premium backup & monitoring
 • **Sigenergy SigenStor** — modular 8–48 kWh, EV-ready, AI energy management
 • **Sungrow SBR** — expandable LiFePO₄, 10-year warranty, great value
+• **GoodWe ESA** — 8 kWh all-in-one, budget-friendly with backup ready
 
 See full specs & photos: **/battery**
 Finance via ACT SHS (3%) or NSW HES (0%): **/government-loans**`,
@@ -184,27 +184,21 @@ Full details: **/government-loans**
 Official NSW page: ${NSW_HES_SCHEME.officialLink}`;
   }
 
-  if (matches(text, ["government loan", "govt loan", "gov loan", "finance scheme", "plenti"])) {
+  if (matches(text, ["government loan", "govt loan", "gov loan", "finance scheme", "brighte"])) {
     return QUICK_RESPONSES.rebates;
   }
 
   if (matches(text, ["tesla", "powerwall", "power wall"])) {
-    const pw = BATTERY_PRODUCTS.find((b) => b.id === "tesla-powerwall-3");
-    return pw
-      ? `**${pw.brand} ${pw.name}** is our premium all-in-one battery pick:
+    return `Capital Solar Energy doesn't install **Tesla Powerwall** systems — we specialise in other premium battery brands that offer excellent performance for Canberra homes:
 
-• **13.5 kWh** storage — enough for most Canberra households overnight
-• Integrated solar inverter — no separate box needed
-• **Whole-home backup** during outages with Storm Watch
-• DC-coupled for maximum solar efficiency
-• Single-phase compatible
+• **Sigenergy SigenStor** — modular 8–48 kWh, EV-ready, AI energy management
+• **Sungrow SBR** — expandable LiFePO₄ with a 10-year warranty
+• **GoodWe ESA** — 8 kWh all-in-one, great value
+• **FoxESS** — modular and cost-effective
 
-Ideal for: ${pw.idealFor}
+All our batteries qualify for **ACT SHS** (3%) and **NSW HES** (0%) government loans.
 
-See photos & full specs: **/battery**
-Finance via ACT SHS (3% loan): **/government-loans**
-Get a Powerwall quote: **/quote**`
-      : QUICK_RESPONSES.batteries;
+See our full lineup: **/battery** · Get a quote: **/quote**`;
   }
 
   if (matches(text, ["sigenergy", "sigenstor", "sigen"])) {
@@ -326,7 +320,7 @@ Get your personalised quote: **/quote**`;
 • **Federal STC rebates** — $2,000–$4,000+ off upfront (we handle all paperwork)
 • **ACT SHS loans** — 3% interest, up to $20,000, 10 years
 • **NSW HES loans** — 0% interest, up to $15,000
-• **Flexible payment plans** via Plenti & Brighte
+• **Flexible payment plans** via Brighte
 
 Many customers find their **monthly savings offset a large portion** of loan repayments — especially with batteries storing cheap daytime solar.
 
@@ -381,7 +375,7 @@ Not sure if we cover your area? Call us or submit your postcode at **/quote** �
 ✓ **${STATS[2].value}★** customer rating · **${STATS[3].value}** client satisfaction
 ✓ Based at **${SITE.address}** — visit our Mitchell office anytime
 
-We use only **Tier-1 hardware** (Jinko, Trina, Fronius, Tesla, Sigenergy) with transparent, itemised quotes. No hidden fees, ever.`;
+We use only **Tier-1 hardware** (Jinko, Trina, Fronius, Sigenergy, Sungrow) with transparent, itemised quotes. No hidden fees, ever.`;
   }
 
   if (matches(text, ["heat pump", "hot water", "hwhp"])) {
@@ -416,7 +410,7 @@ I'm an AI assistant, but everything I share reflects actual Capital Solar pricin
 
 **Panels:** Jinko Tiger Neo, Trina Vertex S+
 **Inverters:** Solis, Growatt, SMA, Fronius, SolarEdge, Sungrow
-**Batteries:** Tesla, Sigenergy, Sungrow, GoodWe, FoxESS
+**Batteries:** Sigenergy, Sungrow, GoodWe, FoxESS
 
 Every component is selected for **Canberra's high-UV climate** and long-term reliability — not whatever's cheapest. See our **Our Proud Partners** section on this page.
 
@@ -445,8 +439,7 @@ Curious about winter performance for your roof? **/quote** for a custom assessme
 • **$950+** → 13kW+ with battery recommended
 
 **Batteries:**
-• **Tesla Powerwall 3** — premium all-in-one, best backup
-• **Sigenergy SigenStor** — most expandable, EV-ready
+• **Sigenergy SigenStor** — most expandable, EV-ready, smart ecosystem
 • **Sungrow SBR** — best warranty, great mid-range value
 • **GoodWe ESA** — budget-friendly all-in-one
 • **FoxESS** — modular, cost-effective
@@ -466,11 +459,11 @@ Tell me your **quarterly bill** and whether you want **backup power** — I'll g
 • **System sizing** — tell me your quarterly bill
 • **Savings & payback** estimates for Canberra
 • **ACT & NSW government loans** (3% and 0% interest)
-• **Battery options** — Tesla, Sigenergy, Sungrow & more
+• **Battery options** — Sigenergy, Sungrow, GoodWe & FoxESS
 • **Installation process** & timelines
 • **Free quotes** — **/quote**
 
-Try asking something like: *"What's the ACT government loan?"*, *"Compare Tesla vs Sigenergy"*, or *"How much for a 10kW system?"*
+Try asking something like: *"What's the ACT government loan?"*, *"Compare Sigenergy vs Sungrow"*, or *"How much for a 10kW system?"*
 
 Or speak directly with our Mitchell team: **${SITE.phone}**`;
 }

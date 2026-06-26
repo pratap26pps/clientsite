@@ -13,7 +13,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/solar", label: "Solar" },
   { href: "/battery", label: "Battery" },
-  { href: "/government-loans", label: "Gov't Loans" },
+  { href: "/government-loans", label: "Finance" },
   { href: "/#packages", label: "Packages" },
   { href: "/#calculator", label: "Calculator" },
   { href: "/#process", label: "Process" },

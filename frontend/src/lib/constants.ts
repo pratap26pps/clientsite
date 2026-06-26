@@ -278,15 +278,6 @@ export const INVERTERS = [
 
 export const BATTERIES = [
   {
-    id: "tesla",
-    name: "Tesla Powerwall 3",
-    brand: "Tesla",
-    capacity: "13.5 kWh",
-    highlight: "Integrated solar inverter",
-    description:
-      "All-in-one home battery with integrated solar inverter, storm watch, and seamless backup power for complete energy independence.",
-  },
-  {
     id: "sigenergy",
     name: "Sigenergy SigenStor",
     brand: "Sigenergy",
@@ -294,6 +285,15 @@ export const BATTERIES = [
     highlight: "Modular scalability",
     description:
       "Next-generation modular battery system with AI-powered energy management and flexible capacity expansion.",
+  },
+  {
+    id: "sungrow",
+    name: "Sungrow SBR Battery Series",
+    brand: "Sungrow",
+    capacity: "9.6–25.6 kWh",
+    highlight: "10-year warranty",
+    description:
+      "Premium modular LiFePO₄ storage with 100% usable energy, expandable design, and one of the strongest warranties in the market.",
   },
 ] as const;
 
@@ -310,7 +310,7 @@ export const SERVICES = [
     id: "battery",
     title: "Smart Battery Storage",
     description:
-      "Store excess solar energy and power your home through outages. Tesla Powerwall 3 and Sigenergy systems available.",
+      "Store excess solar energy and power your home through outages. Sigenergy, Sungrow, GoodWe and FoxESS systems available.",
     icon: "battery",
     href: "/battery",
   },
@@ -382,7 +382,7 @@ export const TESTIMONIALS = [
     rating: 5,
     text: "Capital Solar Energy transformed our home. Our quarterly bill dropped from $850 to under $120. The team was professional, transparent, and the installation was flawless.",
     savings: "86% bill reduction",
-    system: "10kW + Powerwall 3",
+    system: "10kW + Sigenergy Battery",
   },
   {
     name: "David R.",
@@ -429,7 +429,7 @@ export const FAQS = [
   {
     question: "What battery storage options do you offer?",
     answer:
-      "We install Tesla Powerwall 3 and Sigenergy SigenStor systems. Both offer smart energy management, backup power capability, and seamless integration with your solar system.",
+      "We install Sigenergy SigenStor, Sungrow SBR, GoodWe ESA and FoxESS battery systems. All offer smart energy management, backup power capability, and seamless integration with your solar system.",
   },
   {
     question: "Do you handle ACT grid connection applications?",
@@ -475,8 +475,8 @@ export const LOCATION_PAGES = [
     title: "Battery Storage Canberra",
     headline: "Smart Battery Storage Canberra",
     description:
-      "Tesla Powerwall 3 and Sigenergy battery systems for Canberra homes. Store solar energy and power through outages.",
-    keywords: ["battery storage canberra", "home battery canberra", "tesla powerwall canberra"],
+      "Sigenergy, Sungrow, GoodWe and FoxESS battery systems for Canberra homes. Store solar energy and power through outages.",
+    keywords: ["battery storage canberra", "home battery canberra", "sigenergy battery canberra"],
   },
   {
     slug: "heat-pump-canberra",

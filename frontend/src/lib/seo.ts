@@ -139,7 +139,7 @@ export function serviceSchema() {
           itemOffered: {
             "@type": "Service",
             name: "Smart Battery Storage",
-            description: "Tesla Powerwall and Sigenergy battery installation",
+            description: "Sigenergy, Sungrow, GoodWe and FoxESS battery installation",
           },
         },
         {

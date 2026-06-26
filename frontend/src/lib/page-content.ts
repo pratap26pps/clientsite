@@ -72,7 +72,7 @@ export const BATTERY_PAGE = {
     title: "Canberra Winter-Proof Storage Systems",
     description:
       "Store excess daylight energy to run your home through freezing Canberra nights. Blackout protection, tariff arbitrage, and lifetime local support included.",
-    secondaryCta: { label: "View Gov't Loans", href: "/government-loans" },
+    secondaryCta: { label: "View Finance", href: "/government-loans" },
   },
   advantage: {
     eyebrow: "The Blackout & Arbitrage Advantage",
@@ -90,39 +90,6 @@ export const BATTERY_PAGE = {
 } as const;
 
 export const BATTERY_PRODUCTS: BatteryProduct[] = [
-  {
-    id: "tesla-powerwall-3",
-    brand: "Tesla",
-    name: "Powerwall 3",
-    badge: "Premium",
-    badgeIcon: "⚡",
-    tags: [
-      { label: "DC Coupled", color: "purple" },
-      { label: "Single Phase", color: "pink" },
-      { label: "Best Value", color: "teal" },
-    ],
-    features: [
-      {
-        title: "13.5 kWh Storage",
-        description: "Industry-leading capacity for daily household use",
-      },
-      {
-        title: "All-in-One System",
-        description: "Battery + inverter fully integrated",
-      },
-      {
-        title: "Backup Ready",
-        description: "Whole-home backup during outages",
-      },
-      {
-        title: "Solar Optimised",
-        description: "Direct DC coupling for highest efficiency",
-      },
-    ],
-    idealFor:
-      "Homes wanting a premium all-in-one battery with seamless backup and monitoring.",
-    image: "/products/tesla-powerwall-3.jpg",
-  },
   {
     id: "sigenergy-sigenstor",
     brand: "Sigenergy",
@@ -277,7 +244,7 @@ export const GOVERNMENT_LOANS_PAGE = {
     eyebrow: "Why Use Capital Solar",
     title: "We Make Government Loans Simple",
     description:
-      "Our Mitchell-based team has helped hundreds of Canberra families navigate SHS, Brighte, and Plenti loan programs. We handle the paperwork so you can focus on saving.",
+      "Our Mitchell-based team has helped hundreds of Canberra families navigate SHS and Brighte loan programs. We handle the paperwork so you can focus on saving.",
     cards: [
       {
         title: "Full Application Support",
@@ -294,7 +261,7 @@ export const GOVERNMENT_LOANS_PAGE = {
       {
         title: "Trusted Finance Partners",
         description:
-          "We work with Plenti, Brighte, and government schemes to find you the best rate and terms.",
+          "We work with Brighte and government schemes to find you the best rate and terms.",
         icon: "🤝",
       },
       {

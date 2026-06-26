@@ -14,12 +14,12 @@ import { cn } from "@/lib/utils";
 
 type MainTab = "generation" | "storage";
 type GenTab = "jinko" | "trina" | "sungrow" | "fronius";
-type StorageTab = "tesla" | "sigenergy";
+type StorageTab = "sigenergy" | "sungrow";
 
 export function TechnologySection() {
   const [mainTab, setMainTab] = useState<MainTab>("generation");
   const [genTab, setGenTab] = useState<GenTab>("jinko");
-  const [storageTab, setStorageTab] = useState<StorageTab>("tesla");
+  const [storageTab, setStorageTab] = useState<StorageTab>("sigenergy");
 
   const currentGenProduct =
     genTab === "jinko" || genTab === "trina"
@@ -179,8 +179,8 @@ export function TechnologySection() {
               <div className="order-2 lg:order-1">
                 <div className="mb-6 flex gap-2">
                   {[
-                    { id: "tesla" as const, label: "Tesla Powerwall 3" },
                     { id: "sigenergy" as const, label: "Sigenergy" },
+                    { id: "sungrow" as const, label: "Sungrow SBR" },
                   ].map((tab) => (
                     <button
                       key={tab.id}
