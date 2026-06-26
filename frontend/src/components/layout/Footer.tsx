@@ -97,7 +97,7 @@ export function Footer() {
               href="/government-loans"
               className="text-xs font-semibold text-huglo-gold transition-colors duration-300 hover:text-white"
             >
-              Finance
+              Finance Options
             </Link>
             <Link
               href="/reviews"
